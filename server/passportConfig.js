@@ -1,6 +1,15 @@
 const LocalStrategy = require("passport-local").Strategy;
+require("dotenv").config();
 const pool = require("./db");
 const bcrypt = require("bcrypt");
+const JwtStrategy = require("passport-jwt").Strategy;
+const ExtractJwt = require("passport-jwt").ExtractJwt;
+
+const options = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.SECRET,
+  algorithms: ["RS256"],
+};
 
 function initialize(passport) {
   const authenticateUser = (email, password, done) => {
@@ -28,6 +37,7 @@ function initialize(passport) {
       }
     });
   };
+
   passport.use(
     new LocalStrategy(
       {
@@ -36,6 +46,12 @@ function initialize(passport) {
       },
       authenticateUser
     )
+  );
+  passport.use(
+    new JwtStrategy(options, (payload, done) => {
+      console.log(payload, "pay");
+      return authenticateUser(payload.sub);
+    })
   );
   passport.serializeUser((user, done) => (null, user.id));
   passport.deserializeUser((id, done) => {

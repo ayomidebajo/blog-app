@@ -1,4 +1,6 @@
 const express = require("express");
+const dotenv = require("dotenv");
+dotenv.config();
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
@@ -6,8 +8,9 @@ const bcrypt = require("bcrypt");
 const session = require("express-session");
 const flash = require("express-flash");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 const initializePassport = require("./passportConfig");
-
+const { generateAccessToken, authenticateToken } = require("./JWT/issueJWT");
 initializePassport(passport);
 
 const PORT = process.env.PORT || 5000;
@@ -98,6 +101,7 @@ app.post("/register", async (req, res) => {
                 if (err) {
                   throw err;
                 }
+
                 console.log(results.rows, "success");
                 req.flash("sucess");
               }
@@ -118,13 +122,20 @@ app.post("/register", async (req, res) => {
 //   failureMessage: "login error",
 // }
 
-app.post("/login", (req, res) => {
-  passport.authenticate("local", {
-    successMessage: "successfully logged in",
-    failureMessage: "login error",
-  });
+app.post("/login", (req, res, next) => {
+  try {
+    const token = jwt.sign({ user: req.body.email }, process.env.SECRET);
+    console.log(req.body, "user");
+    res.json({ token });
+  } catch (error) {
+    return next(error);
+  }
+});
 
-  res.send("logged in");
+app.get("/posts", authenticateToken, (req, res) => {
+  res.json({
+    post: "posts",
+  });
 });
 
 app.get("logout", (req, res) => {
