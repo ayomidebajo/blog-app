@@ -9,9 +9,9 @@ const session = require("express-session");
 const flash = require("express-flash");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
-const initializePassport = require("./passportConfig");
+const { initialize, authenticateUser } = require("./passportConfig");
 const { generateAccessToken, authenticateToken } = require("./JWT/issueJWT");
-initializePassport(passport);
+initialize(passport);
 
 const PORT = process.env.PORT || 5000;
 
@@ -124,13 +124,15 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", (req, res, next) => {
   try {
-    const token = jwt.sign({ user: req.body.email }, process.env.SECRET);
-    console.log(req.body, "user");
-    res.json({ token });
+    authenticateUser(req, res, next);
   } catch (error) {
     return next(error);
   }
 });
+
+// const token = jwt.sign({ user: req.body.email }, process.env.SECRET);
+// const user = req.body.email;
+// res.json({ token, user });
 
 app.get("/posts", authenticateToken, (req, res) => {
   res.json({

@@ -4,6 +4,7 @@ const pool = require("./db");
 const bcrypt = require("bcrypt");
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
+const jwt = require("jsonwebtoken");
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -47,12 +48,8 @@ function initialize(passport) {
       authenticateUser
     )
   );
-  passport.use(
-    new JwtStrategy(options, (payload, done) => {
-      console.log(payload, "pay");
-      return authenticateUser(payload.sub);
-    })
-  );
+
+  passport.use(new JwtStrategy(options, authenticateUser));
   passport.serializeUser((user, done) => (null, user.id));
   passport.deserializeUser((id, done) => {
     pool.query(`SELECT * FROM users WHERE id = $1`, [id], (err, result) => {
@@ -64,4 +61,30 @@ function initialize(passport) {
   });
 }
 
-module.exports = initialize;
+const authenticateUser = (req, res, done) => {
+  const { email, password, username } = req.body;
+  const response = res;
+  pool.query(`SELECT * FROM users WHERE email = $1`, [email], (err, res) => {
+    if (err) {
+      throw err;
+    }
+    if (res.rows.length > 0) {
+      const user = res.rows[0];
+      bcrypt.compare(password, user.password, (err, isMatch) => {
+        if (err) {
+          throw err;
+        }
+        if (isMatch) {
+          const token = jwt.sign({ user: req.body.email }, process.env.SECRET);
+          response.json({ token, user: user?.username });
+        } else {
+          response.json({ message: "user not registered!" });
+        }
+      });
+    } else {
+      response.json({ message: "user not registered!" });
+    }
+  });
+};
+
+module.exports = { initialize, authenticateUser };
