@@ -6,7 +6,7 @@ import rootStore from "./stores/rootStore";
 import authStore from "./stores/authStore";
 
 const Root = (
-  <Provider rootStore={rootStore} authStore={rootStore.authStore}>
+  <Provider rootStore={rootStore} authStore={authStore}>
     <App />
   </Provider>
 );

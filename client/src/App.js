@@ -5,10 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Signin from "./components/authpages/Signin";
 import SignUp from "./components/authpages/SignUp";
 import Home from "./components/Home";
-import { inject, observer } from "mobx-react";
 
-@inject("rootStore", "authStore")
-@observer
 class App extends Component {
   render() {
     return (
