@@ -12,7 +12,7 @@ const options = {
   algorithms: ["RS256"],
 };
 
-function initialize(passport) {
+function initializePassport(passport) {
   const authenticateUser = (email, password, done) => {
     pool.query(`SELECT * FROM users WHERE email = $1`, [email], (err, res) => {
       if (err) {
@@ -87,4 +87,4 @@ const authenticateUser = (req, res, done) => {
   });
 };
 
-module.exports = { initialize, authenticateUser };
+module.exports = { initializePassport, authenticateUser };
