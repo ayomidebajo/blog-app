@@ -3,6 +3,7 @@ import authIllustration from "../../assets/blog-illustration.png";
 import { inject, observer } from "mobx-react";
 
 @inject("rootStore", "authStore")
+// Add the signin state
 @observer
 class Signin extends Component {
   state = {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import authIllustration from "../../assets/blog-illustration.png";
 
+//Add the signup state
 class SignUp extends Component {
   render() {
     return (
