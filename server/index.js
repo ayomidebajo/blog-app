@@ -46,7 +46,6 @@ app.get("/", async (req, res) => {
 
 app.get("/register", async (req, res) => {
   try {
-    res.send("working");
     await console.log("register get working");
   } catch (error) {
     console.error(error.message);
@@ -92,7 +91,7 @@ app.post("/register", async (req, res) => {
           if (results.rows.length > 0) {
             errors.push({ message: "Email already registered" });
             console.log(results.rows.length, "row length", errors.length);
-            res.send(errors);
+            res.status(403).json(errors);
           } else {
             pool.query(
               `INSERT INTO users (username, password, email)
@@ -107,7 +106,7 @@ app.post("/register", async (req, res) => {
                 req.flash("sucess");
               }
             );
-            res.send("created!!");
+            res.json({ message: "account created" });
           }
         }
       );
