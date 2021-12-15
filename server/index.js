@@ -74,7 +74,7 @@ app.post("/register", async (req, res) => {
     }
     console.log(errors.length, "len");
     if (errors.length > 0) {
-      res.send(errors);
+      res.json(errors);
     } else {
       // res.send("created!!");
       let hashedPassword = await bcrypt.hash(password, 10);
@@ -103,7 +103,7 @@ app.post("/register", async (req, res) => {
                 }
 
                 console.log(results.rows, "success");
-                req.flash("sucess");
+                // req.flash("sucess");
               }
             );
             res.json({ message: "account created" });
@@ -112,8 +112,9 @@ app.post("/register", async (req, res) => {
       );
     }
   } catch (error) {
-    res.send(error);
-    console.log(error.message);
+    return next(error);
+    // res.send(error);
+    // console.log(error.message);
   }
 });
 // authenticate options
@@ -122,10 +123,17 @@ app.post("/register", async (req, res) => {
 //   failureMessage: "login error",
 // }
 
+app.get("/login", async (req, res) => {
+  try {
+    res.send("working");
+  } catch (error) {
+    console.error(error.message);
+  }
+});
+
 app.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
-    const token = jwt.sign({ user: email }, process.env.SECRET);
 
     await pool.query(
       `SELECT * FROM users WHERE email = $1`,
@@ -137,13 +145,14 @@ app.post("/login", async (req, res, next) => {
 
         if (results.rows.length > 0) {
           if (
-            !results.rows[0] ||
-            !bcrypt.compareSync(password, results.rows[0].password)
+            results.rows[0] &&
+            bcrypt.compareSync(password, results.rows[0].password)
           ) {
-            res.json({ message: "User not found!" });
-          } else {
-            res.json({ token, username: results.rows[0].username });
+            const token = jwt.sign({ user: email }, process.env.SECRET);
+            res.json({ message: token, username: results.rows[0].username });
           }
+        } else {
+          res.status(404).json({ message: "user does not exist" });
         }
       }
     );

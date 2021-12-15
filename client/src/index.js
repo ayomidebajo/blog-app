@@ -2,11 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider } from "mobx-react";
-import rootStore from "./stores/rootStore";
-import authStore from "./stores/authStore";
+import { signUp, signIn } from "./stores/authStore";
 
 const Root = (
-  <Provider rootStore={rootStore} authStore={authStore}>
+  <Provider signIn={signIn} signUp={signUp}>
     <App />
   </Provider>
 );

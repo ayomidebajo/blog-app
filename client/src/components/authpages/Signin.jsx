@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import authIllustration from "../../assets/blog-illustration.png";
 import { inject, observer } from "mobx-react";
 
-@inject("rootStore", "authStore")
+@inject("signIn", "signUp")
 // Add the signin state
 @observer
 class Signin extends Component {
@@ -13,20 +13,21 @@ class Signin extends Component {
 
   handleChange = (e) => {
     this.setState({
+      ...this.state,
       [e.target.name]: e.target.value,
     });
   };
   handleSubmit = (e) => {
     e.preventDefault();
     console.log(this.state);
-    this.props.authStore.pushToTest(this.state);
+    this.props.signIn.signin(this.state);
   };
   render() {
-    const { authStore } = this.props;
-    console.log(authStore, "this props");
+    // const { signUp } = this.props;
+    console.log(this.props, "this props");
     return (
       <div class="auth--container">
-        <p>checking...{authStore.pushTest}</p>
+        {/* <p>checking...{SignUpStore}</p> */}
         <div class="row">
           <div class="col-lg-6 auth-background p-0 d-flex justify-content-center align-items-center">
             <div class="card auth-card">

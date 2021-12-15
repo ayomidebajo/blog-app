@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import authIllustration from "../../assets/blog-illustration.png";
 import { inject, observer } from "mobx-react";
+import { Redirect } from "react-router";
 
 //Add the signup state
-@inject("rootStore", "authStore")
+@inject("signIn", "signUp")
 @observer
 class SignUp extends Component {
   state = {
@@ -29,7 +30,7 @@ class SignUp extends Component {
         ...this.state,
         error: "",
       });
-      this.props.authStore.signup(
+      this.props.SignUpStore.signup(
         this.state.email,
         this.state.username,
         this.state.password,
@@ -41,6 +42,7 @@ class SignUp extends Component {
         error: "passwords don't match, try again",
       });
     }
+    return <Redirect to="/signin" />;
   };
   render() {
     console.log(this.props, "think about it");
