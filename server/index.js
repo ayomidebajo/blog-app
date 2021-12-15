@@ -8,6 +8,7 @@ const bcrypt = require("bcrypt");
 const session = require("express-session");
 const flash = require("express-flash");
 const passport = require("passport");
+const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const { initializePassport } = require("./passportConfig");
 const { generateAccessToken, authenticateToken } = require("./JWT/issueJWT");
@@ -26,6 +27,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -149,6 +151,9 @@ app.post("/login", async (req, res, next) => {
             bcrypt.compareSync(password, results.rows[0].password)
           ) {
             const token = jwt.sign({ user: email }, process.env.SECRET);
+            res.cookie("token", token, {
+              httpOnly: true,
+            });
             res.json({ message: token, username: results.rows[0].username });
           }
         } else {
