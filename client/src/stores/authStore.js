@@ -1,6 +1,7 @@
-import { makeObservable, observable, computed, action, when } from "mobx";
+import { makeObservable, observable, action, when } from "mobx";
 import { fromPromise } from "mobx-utils";
 import Cookie from "js-cookie";
+import { Redirect } from "react-router";
 
 import axios from "axios";
 // import rootStore from "./rootStore";
@@ -33,6 +34,7 @@ class SignInStore {
   }
   @action signin = (content) => {
     // console.log(content, "content");
+
     const res = fromPromise(axios.post("http://localhost:5000/login", content));
     console.log(res.value, "uhm");
     when(
@@ -40,7 +42,6 @@ class SignInStore {
       () => {
         const { token } = res.value.data;
         Cookie.set("user_token", token);
-        console.log("I got", content, res.value);
       }
     );
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import authIllustration from "../../assets/blog-illustration.png";
 import { inject, observer } from "mobx-react";
 import Cookie from "js-cookie";
+import { Redirect } from "react-router";
 
 @inject("signIn", "signUp")
 // Add the signin state
@@ -24,8 +25,10 @@ class Signin extends Component {
     this.props.signIn.signin(this.state);
   };
   render() {
-    // const { signUp } = this.props;
-    console.log(this.props, "this props");
+    const cook = Cookie.get("user_token");
+    if (cook) {
+      return <Redirect to="/" />;
+    }
     return (
       <div class="auth--container">
         {/* <p>checking...{SignUpStore}</p> */}
