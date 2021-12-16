@@ -152,9 +152,10 @@ app.post("/login", async (req, res, next) => {
           ) {
             const token = jwt.sign({ user: email }, process.env.SECRET);
             res.cookie("token", token, {
+              maxAge: 60 * 60 * 24 * 3 * 1000,
               httpOnly: true,
             });
-            res.json({ message: token, username: results.rows[0].username });
+            res.json({ token: token, username: results.rows[0].username });
           }
         } else {
           res.status(404).json({ message: "user does not exist" });

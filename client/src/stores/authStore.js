@@ -1,5 +1,6 @@
 import { makeObservable, observable, computed, action, when } from "mobx";
 import { fromPromise } from "mobx-utils";
+import Cookie from "js-cookie";
 
 import axios from "axios";
 // import rootStore from "./rootStore";
@@ -37,6 +38,8 @@ class SignInStore {
     when(
       () => res.state !== "pending",
       () => {
+        const { token } = res.value.data;
+        Cookie.set("user_token", token);
         console.log("I got", content, res.value);
       }
     );
