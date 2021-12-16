@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import authIllustration from "../../assets/blog-illustration.png";
 import { inject, observer } from "mobx-react";
+import Cookie from "js-cookie";
 
 @inject("signIn", "signUp")
 // Add the signin state
