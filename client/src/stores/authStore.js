@@ -1,14 +1,9 @@
 import { makeObservable, observable, action, when } from "mobx";
 import { fromPromise } from "mobx-utils";
 import Cookie from "js-cookie";
-import { Redirect } from "react-router";
-
 import axios from "axios";
-// import rootStore from "./rootStore";
 
 class SignUpStore {
-  // @observable user = "";
-  // @observable testArray = [];
   constructor() {
     makeObservable(this);
   }
@@ -17,12 +12,7 @@ class SignUpStore {
     let content = { email, username, password, confirmPassword };
     const res = await axios.post("http://localhost:5000/register", content);
     console.log(res, "response from axios and backend");
-    // this.testArray.push(...this.testArray, content);
   };
-
-  // @computed get pushTest() {
-  //   return this.testArray.length;
-  // }
 }
 
 class SignInStore {
@@ -33,8 +23,6 @@ class SignInStore {
     makeObservable(this);
   }
   @action signin = (content) => {
-    // console.log(content, "content");
-
     const res = fromPromise(axios.post("http://localhost:5000/login", content));
     console.log(res.value, "uhm");
     when(
@@ -44,10 +32,6 @@ class SignInStore {
         Cookie.set("user_token", token);
       }
     );
-
-    // console.log(res, "response from axios and backend");
-    // return res;
-    // this.testArray.push(content);
   };
 }
 

@@ -4,9 +4,7 @@ import { Redirect } from "react-router";
 
 class Home extends Component {
   render() {
-    // Cookie.remove("user_token");
     const cook = Cookie.get("user_token");
-    console.log(cook, "i'm cooking something");
 
     if (!cook) {
       return <Redirect to="/login" />;
