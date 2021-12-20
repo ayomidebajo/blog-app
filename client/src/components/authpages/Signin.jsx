@@ -11,74 +11,82 @@ class Signin extends Component {
   state = {
     email: "",
     password: "",
+    cook: "",
   };
 
-  handleChange = (e) => {
-    this.setState({
-      ...this.state,
-      [e.target.name]: e.target.value,
-    });
-  };
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state);
-    this.props.signIn.signin(this.state);
-  };
   render() {
+    const handleChange = (e) => {
+      this.setState({
+        ...this.state,
+        [e.target.name]: e.target.value,
+      });
+    };
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(this.state);
+      this.props.signIn.signin(this.state);
+      if (this.props.signIn.user) {
+        this.setState({
+          ...this.state,
+          cook: this.props.signIn.user,
+        });
+      }
+    };
     const cook = Cookie.get("user_token");
-    if (cook) {
+
+    if (this.state.cook) {
       return <Redirect to="/" />;
     }
+    console.log(this.state, this.props.signIn.user, "baby");
     return (
-      <div class="auth--container">
-        {/* <p>checking...{SignUpStore}</p> */}
-        <div class="row">
-          <div class="col-lg-6 auth-background p-0 d-flex justify-content-center align-items-center">
-            <div class="card auth-card">
-              <div class="card-body">
-                <h5 class="card-title">Sign in</h5>
-                <form onSubmit={this.handleSubmit}>
-                  <div class="form-group mt-3">
-                    <label for="exampleInputEmail1">Email address</label>
+      <div className="auth--container">
+        <div className="row">
+          <div className="col-lg-6 auth-background p-0 d-flex justify-content-center align-items-center">
+            <div className="card auth-card">
+              <div className="card-body">
+                <h5 className="card-title">Sign in</h5>
+                <form onSubmit={handleSubmit}>
+                  <div className="form-group mt-3">
+                    <label htmlFor="exampleInputEmail1">Email address</label>
                     <input
                       type="email"
                       name="email"
                       value={this.state.email}
-                      onChange={this.handleChange}
-                      class="form-control"
+                      onChange={handleChange}
+                      className="form-control"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
                     />
-                    <small id="emailHelp" class="form-text text-muted">
+                    <small id="emailHelp" className="form-text text-muted">
                       We'll never share your email with anyone else.
                     </small>
                   </div>
-                  <div class="form-group my-3">
-                    <label for="exampleInputPassword1">Password</label>
+                  <div className="form-group my-3">
+                    <label htmlFor="exampleInputPassword1">Password</label>
                     <input
                       type="password"
                       name="password"
                       value={this.state.password}
-                      onChange={this.handleChange}
-                      class="form-control"
+                      onChange={handleChange}
+                      className="form-control"
                       id="exampleInputPassword1"
                     />
                   </div>
 
-                  <button type="submit" class="btn btn-primary">
+                  <button type="submit" className="btn btn-primary">
                     Submit
                   </button>
                 </form>
               </div>
             </div>
           </div>
-          <div class="col-lg-6 p-0 auth-illustration">
+          <div className="col-lg-6 p-0 auth-illustration">
             <img
               src={authIllustration}
               width="100%"
               height="100%"
               alt=""
-              srcset=""
+              srcSet=""
             />
           </div>
         </div>

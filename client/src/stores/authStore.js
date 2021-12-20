@@ -1,4 +1,4 @@
-import { makeObservable, observable, action, when } from "mobx";
+import { makeObservable, observable, action, when, get } from "mobx";
 import { fromPromise } from "mobx-utils";
 import Cookie from "js-cookie";
 import axios from "axios";
@@ -25,14 +25,28 @@ class SignInStore {
   @action signin = (content) => {
     const res = fromPromise(axios.post("http://localhost:5000/login", content));
     console.log(res.value, "uhm");
-    when(
-      () => res.state !== "pending",
-      () => {
-        const { token } = res.value.data;
-        Cookie.set("user_token", token);
-      }
-    );
+    res.then((rest) => {
+      const { token } = rest.data;
+      const { username } = rest.data;
+      this.user = username;
+      Cookie.set("user_token", token);
+      console.log(this.user, "just rest");
+      // window.location.reload();
+    });
+
+    // return when(
+    //   () => res.state !== "pending",
+    //   () => {
+    //     const { token } = res.value.data;
+    //     this.user = res.value.data.username;
+    //     Cookie.set("user_token", token);
+    //     window.location.reload();
+    //   }
+    // );
   };
+  get user() {
+    return this.user;
+  }
 }
 
 const signIn = new SignInStore();

@@ -150,13 +150,19 @@ app.post("/login", async (req, res, next) => {
             results.rows[0] &&
             bcrypt.compareSync(password, results.rows[0].password)
           ) {
-            const token = jwt.sign({ user: email }, process.env.SECRET);
+            const options = {
+              expiresIn: "2 days",
+            };
+            const token = jwt.sign({ user: email }, process.env.SECRET, {
+              expiresIn: "2days",
+            });
             res.cookie("token", token, {
-              maxAge: 60 * 60 * 24 * 3 * 1000,
+              maxAge: new Date(Date.now() + 90000),
               httpOnly: true,
             });
             res.json({ token: token, username: results.rows[0].username });
           }
+          //  60 * 60 * 24 * 1 * 1000,
         } else {
           res.status(404).json({ message: "user does not exist" });
         }
