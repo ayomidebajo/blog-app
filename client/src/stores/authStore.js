@@ -2,6 +2,7 @@ import { makeObservable, observable, action, when, get } from "mobx";
 import { fromPromise } from "mobx-utils";
 import Cookie from "js-cookie";
 import axios from "axios";
+import decode from "jwt-decode";
 
 class SignUpStore {
   constructor() {
@@ -29,20 +30,18 @@ class SignInStore {
       const { token } = rest.data;
       const { username } = rest.data;
       this.user = username;
-      Cookie.set("user_token", token);
-      console.log(this.user, "just rest");
-      // window.location.reload();
+      localStorage.setItem("user_token", token);
+      window.location.href = "/";
     });
-
-    // return when(
-    //   () => res.state !== "pending",
-    //   () => {
-    //     const { token } = res.value.data;
-    //     this.user = res.value.data.username;
-    //     Cookie.set("user_token", token);
-    //     window.location.reload();
-    //   }
-    // );
+  };
+  @action verifyTokenValidity = (token) => {
+    let { exp } = decode(token);
+    console.log(exp, "just rest");
+    if (exp < Date.now() / 1000) {
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }
+    return;
   };
   get user() {
     return this.user;

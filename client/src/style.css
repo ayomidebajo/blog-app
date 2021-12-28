@@ -437,6 +437,12 @@ textarea {
 .auth--container {
   width: 100%;
   overflow: hidden;
+  max-height: 100%;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form_container {

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import authIllustration from "../../assets/blog-illustration.png";
 import { inject, observer } from "mobx-react";
-import Cookie from "js-cookie";
 import { Redirect } from "react-router";
 
 @inject("signIn", "signUp")
@@ -32,7 +31,6 @@ class Signin extends Component {
         });
       }
     };
-    const cook = Cookie.get("user_token");
 
     if (this.state.cook) {
       return <Redirect to="/" />;
@@ -41,7 +39,7 @@ class Signin extends Component {
     return (
       <div className="auth--container">
         <div className="row">
-          <div className="col-lg-6 auth-background p-0 d-flex justify-content-center align-items-center">
+          <div className="col-lg-6 col-md-6 col-sm-12 m-sm-auto auth-background p-0 d-flex justify-content-center align-items-center">
             <div className="card auth-card">
               <div className="card-body">
                 <h5 className="card-title">Sign in</h5>
@@ -80,13 +78,14 @@ class Signin extends Component {
               </div>
             </div>
           </div>
-          <div className="col-lg-6 p-0 auth-illustration">
+          <div className="col-lg-6 col-md-6 p-0 auth-illustration">
             <img
               src={authIllustration}
-              width="100%"
-              height="100%"
+              width="90%"
+              height="90%"
               alt=""
               srcSet=""
+              className="d-none d-lg-block d-md-block"
             />
           </div>
         </div>
