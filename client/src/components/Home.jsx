@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
 
 @inject("signIn", "signUp")
@@ -8,108 +7,53 @@ import { Link } from "react-router-dom";
 @observer
 class Home extends Component {
   render() {
-    // Cookie.remove("user_token");
-    // const cook = localStorage.getItem("user_token");
-
-    // if (!cook) {
-    //   return <Redirect to="/login" />;
-    // }
-
-    // console.log(this.props.signIn.user, "user");
     return (
       <div className="main--container">
         <div className="">
-          <div className="nav-wrapper">
-            <nav
-              className="
-              navbar navbar-expand-lg
-              nav-custom
-              fixed-top
-              navbar-light
-              bg-transparent
-            "
-            >
-              <div className="container">
-                <Link className="navbar-brand mr-auto" to="#">
-                  Logo
-                </Link>
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#navbarTogglerDemo01"
-                  aria-controls="navbarTogglerDemo01"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span className="navbar-toggler-icon"></span>
-                </button>
-
-                <div
-                  className="collapse navbar-collapse"
-                  id="navbarTogglerDemo01"
-                >
-                  <ul className="navbar-nav ml-auto align-items-center mt-lg-0">
-                    <li className="nav-item active">
-                      <div className="text-uppercase ">notifications</div>
-                    </li>
-                    <li className="nav-item active mx-2">
-                      <div className="text-uppercase ">Create post</div>
-                    </li>
-                    <li className="nav-item ">
-                      <div className="dropdown ">
-                        <button
-                          className="btn  avatar dropdown-toggle"
-                          type="button"
-                          id="dropdownMenuButton"
-                          data-toggle="dropdown"
-                          aria-expanded="false"
-                        ></button>
-                        <div
-                          className="dropdown-menu"
-                          aria-labelledby="dropdownMenuButton"
-                        >
-                          <Link className="dropdown-item" to="./profile.html">
-                            Profile
-                          </Link>
-                          <Link className="dropdown-item" to="#">
-                            Settings
-                          </Link>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+          <div className="navbar-custom">
+            <ul className="navbar-links__container">
+              <li className="navbar-link">
+                <div className="logo">
+                  <em>Blog</em>
                 </div>
-              </div>
-            </nav>
+              </li>
+              <li className="navbar-link">
+                <div className="text-uppercase">notifications</div>
+              </li>
+
+              <li className="navbar-link">
+                <div className="avatar"></div>
+              </li>
+            </ul>
           </div>
-          <div className="container-sm">
-            <div className="p-3">
-              <div className="row">
-                <div className="card" style={{ width: "100%" }}>
-                  <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">
-                      Card subtitle
-                    </h6>
-                    <p className="card-text">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Esse harum pariatur omnis, beatae nullLink dolore magni
-                      quam officiLink autem, possimus tenetur veniam debitis
-                      ducimus aspernatur rerum ratione sint? Reprehenderit, eum!
-                    </p>
-                    <Link to="#" className="card-link">
-                      Ayomide Bajo
-                    </Link>
-                    <Link to="#" className="card-link">
-                      23-11-21
-                    </Link>
-                  </div>
+        </div>
+        <div className="container-sm">
+          <div className="p-3">
+            <div className="row">
+              <div className="card" style={{ width: "100%" }}>
+                <div className="card-body">
+                  <h5 className="card-title">Card title</h5>
+                  <h6 className="card-subtitle mb-2 text-muted">
+                    Card subtitle
+                  </h6>
+                  <p className="card-text">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Esse harum pariatur omnis, beatae nullLink dolore magni quam
+                    officiLink autem, possimus tenetur veniam debitis ducimus
+                    aspernatur rerum ratione sint? Reprehenderit, eum!
+                  </p>
+                  <Link to="#" className="card-link">
+                    Ayomide Bajo
+                  </Link>
+                  <Link to="#" className="card-link">
+                    23-11-21
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div className="main-body mt-5">
           <div className="container">
             <div className="row">
