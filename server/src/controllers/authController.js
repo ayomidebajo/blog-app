@@ -1,3 +1,9 @@
+const pool = require("../../db");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { initializePassport } = require("../../passportConfig");
+const { generateAccessToken, authenticateToken } = require("../JWT/issueJWT");
+
 const registerController = async (req, res, next) => {
   try {
     let errors = [];
