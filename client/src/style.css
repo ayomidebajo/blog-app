@@ -15,24 +15,37 @@
 }
 
 .avatar {
-  width: 70px;
-  height: 70px;
+  width: 30px;
+  height: 30px;
   border: 1px solid black;
   border-radius: 50%;
   color: transparent !important;
 }
 
 .navbar-custom {
-  width: 90%;
-  margin: auto;
+  height: inherit;
   padding: 10px;
+}
+
+.navbar-custom__container {
+  height: 60px;
+  width: 100%;
+}
+.navbar-custom__active {
+  box-shadow: 0 4px 12px 0 rgb(0 0 0 / 5%);
   background-color: #fff;
+  z-index: 10;
+  top: 0;
+  position: fixed;
+  width: 100%;
 }
 
 .navbar-links__container {
   list-style: none;
   display: flex;
   align-items: center;
+  width: 90%;
+  margin: auto;
 }
 
 .navbar-link:nth-child(2) {

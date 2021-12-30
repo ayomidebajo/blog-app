@@ -6,15 +6,54 @@ import { Link } from "react-router-dom";
 // Add the signin state
 @observer
 class Home extends Component {
+  navContainer = React.createRef(null);
+  state = {
+    isVisble: false,
+  };
+
+  callBackFunction = (entries) => {
+    const [entry] = entries;
+    this.setState({
+      ...this.state,
+      isVisble: !entry.isIntersecting,
+    });
+  };
+
+  optionsFunc = () => {
+    let options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: [0.0, 1.0],
+    };
+    return options;
+  };
+
+  componentDidMount() {
+    const observer = new IntersectionObserver(
+      this.callBackFunction,
+      this.optionsFunc
+    );
+    if (this.navContainer.current) {
+      observer.observe(this.navContainer.current);
+    }
+  }
+
   render() {
     return (
       <div className="main--container">
-        <div className="">
-          <div className="navbar-custom">
+        <div className="navbar-custom__container" ref={this.navContainer}>
+          <div
+            className={`navbar-custom ${
+              this.state.isVisble ? "navbar-custom__active" : ""
+            }`}
+          >
             <ul className="navbar-links__container">
               <li className="navbar-link">
                 <div className="logo">
-                  <em>Blog</em>
+                  <em>
+                    Blog{" "}
+                    {console.log(this.state.isVisble ? "hell yeah" : "hell no")}
+                  </em>
                 </div>
               </li>
               <li className="navbar-link">
