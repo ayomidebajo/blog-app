@@ -32,9 +32,6 @@ class Signin extends Component {
       }
     };
 
-    if (this.state.cook) {
-      return <Redirect to="/" />;
-    }
     console.log(this.state, this.props.signIn.user, "baby");
     return (
       <div className="auth--container">
