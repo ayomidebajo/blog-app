@@ -9,7 +9,6 @@ const registerController = async (req, res, next) => {
   try {
     let errors = [];
     let { username, email, password, confirmPassword } = req.body;
-    console.log(req.body);
     // res.send("created!!");
     if (!username || !email || !password || !confirmPassword) {
       errors.push({
@@ -25,7 +24,6 @@ const registerController = async (req, res, next) => {
     if (confirmPassword != password) {
       errors.push({ message: "passwords don't match" });
     }
-    console.log(errors.length, "len");
     if (errors.length > 0) {
       res.json(errors);
     } else {
@@ -44,7 +42,6 @@ const registerController = async (req, res, next) => {
 
           if (results.rows.length > 0) {
             errors.push({ message: "Email already registered" });
-            console.log(results.rows.length, "row length", errors.length);
             res.status(403).json(errors);
           } else {
             pool.query(
