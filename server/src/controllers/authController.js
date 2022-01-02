@@ -1,8 +1,9 @@
-const pool = require("../../db");
+const pool = require("../../db/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { initializePassport } = require("../../passportConfig");
 const { generateAccessToken, authenticateToken } = require("../JWT/issueJWT");
+const date = require("date-and-time");
 
 const registerController = async (req, res, next) => {
   try {
@@ -39,6 +40,7 @@ const registerController = async (req, res, next) => {
           if (err) {
             throw err;
           }
+          const now = new Date();
 
           if (results.rows.length > 0) {
             errors.push({ message: "Email already registered" });
@@ -46,9 +48,14 @@ const registerController = async (req, res, next) => {
             res.status(403).json(errors);
           } else {
             pool.query(
-              `INSERT INTO users (username, password, email)
-              VALUES ($1, $2, $3) RETURNING username, password`,
-              [username, hashedPassword, email],
+              `INSERT INTO users (username, password, email, created_on)
+              VALUES ($1, $2, $3, $4) RETURNING username, password`,
+              [
+                username,
+                hashedPassword,
+                email,
+                date.format(now, "YYYY/MM/DD HH:mm:ss"),
+              ],
               (err, res) => {
                 if (err) {
                   throw err;

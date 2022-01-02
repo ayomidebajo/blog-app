@@ -3,7 +3,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
 const cors = require("cors");
-const pool = require("./db");
+const pool = require("./db/db");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const flash = require("express-flash");
