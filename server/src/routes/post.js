@@ -9,6 +9,7 @@ const flash = require("express-flash");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
+const { generateAccessToken, authenticateToken } = require("../JWT/issueJWT");
 
 const router = express.Router();
 

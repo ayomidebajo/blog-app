@@ -11,10 +11,7 @@ const passport = require("passport");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const { initializePassport } = require("./passportConfig");
-const {
-  generateAccessToken,
-  authenticateToken,
-} = require("./src/JWT/issueJWT");
+
 const authRouter = require("./src/routes/auth");
 
 initializePassport(passport);

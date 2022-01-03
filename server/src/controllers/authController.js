@@ -31,7 +31,6 @@ const registerController = async (req, res, next) => {
     } else {
       // res.send("created!!");
       let hashedPassword = await bcrypt.hash(password, 10);
-      console.log(hashedPassword, "hash");
 
       await pool.query(
         `SELECT * FROM users WHERE email = $1`,
@@ -46,7 +45,7 @@ const registerController = async (req, res, next) => {
             errors.push({ message: "Email already registered" });
             res.status(403).json(errors);
           } else {
-            let id = await pool.query(
+            await pool.query(
               `INSERT INTO users (username, password, email, created_on, user_id)
               VALUES ($1, $2, $3, $4, $5) RETURNING id`,
               [
@@ -61,11 +60,8 @@ const registerController = async (req, res, next) => {
                   throw err;
                 }
                 createProfile(res.rows[0].id);
-                console.log(res.rows, "success");
-                // req.flash("sucess");
               }
             );
-            console.log(id, "wtf");
 
             res.json({ message: "account created" });
           }
@@ -74,8 +70,6 @@ const registerController = async (req, res, next) => {
     }
   } catch (error) {
     return next(error);
-    // res.send(error);
-    // console.log(error.message);
   }
 };
 
