@@ -1,6 +1,5 @@
 //Todo add endpoint for viewing profile
 const pool = require("../../db/db");
-//Todo make research on adding token to headers after signin
 const viewProfile = async (req, res, next) => {
   try {
     let errors = [];
