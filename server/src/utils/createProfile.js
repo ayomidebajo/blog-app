@@ -1,12 +1,17 @@
 const pool = require("../../db/db");
+const date = require("date-and-time");
+const now = new Date();
 
-const createProfile = (data) => {
+const createProfile = async (id) => {
+  console.log(id, "see");
   try {
-    await pool.query(`UPDATE profile SET user_id =  WHERE email = data.user`, [
-      data.user,
-      data.created_at,
-    ]);
+    await pool.query(
+      `INSERT INTO profile (user_id, created_at) VALUES ($1, $2) RETURNING id`,
+      [id, date.format(now, "YYYY/MM/DD HH:mm:ss")]
+    );
   } catch (error) {
     throw error;
   }
 };
+
+module.exports = createProfile;

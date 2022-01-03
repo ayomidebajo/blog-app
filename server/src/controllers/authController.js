@@ -4,6 +4,8 @@ const jwt = require("jsonwebtoken");
 const { initializePassport } = require("../../passportConfig");
 const { generateAccessToken, authenticateToken } = require("../JWT/issueJWT");
 const date = require("date-and-time");
+const { v4: uuidv4 } = require("uuid");
+const createProfile = require("../utils/createProfile");
 
 const registerController = async (req, res, next) => {
   try {
@@ -34,7 +36,7 @@ const registerController = async (req, res, next) => {
       await pool.query(
         `SELECT * FROM users WHERE email = $1`,
         [email],
-        (err, results) => {
+        async (err, results) => {
           if (err) {
             throw err;
           }
@@ -44,24 +46,27 @@ const registerController = async (req, res, next) => {
             errors.push({ message: "Email already registered" });
             res.status(403).json(errors);
           } else {
-            pool.query(
-              `INSERT INTO users (username, password, email, created_on)
-              VALUES ($1, $2, $3, $4) RETURNING username, password`,
+            let id = await pool.query(
+              `INSERT INTO users (username, password, email, created_on, user_id)
+              VALUES ($1, $2, $3, $4, $5) RETURNING id`,
               [
                 username,
                 hashedPassword,
                 email,
                 date.format(now, "YYYY/MM/DD HH:mm:ss"),
+                uuidv4(),
               ],
               (err, res) => {
                 if (err) {
                   throw err;
                 }
-
-                console.log(results.rows, "success");
+                createProfile(res.rows[0].id);
+                console.log(res.rows, "success");
                 // req.flash("sucess");
               }
             );
+            console.log(id, "wtf");
+
             res.json({ message: "account created" });
           }
         }
