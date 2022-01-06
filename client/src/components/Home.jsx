@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 @inject("signIn", "signUp")
 // Add the signin state
+
 @observer
 class Home extends Component {
   navContainer = React.createRef(null);
@@ -39,6 +40,13 @@ class Home extends Component {
   }
 
   render() {
+    const token = localStorage.getItem("user_token");
+
+    if (token) {
+      this.props.signIn.verifyTokenValidity(token);
+    } else {
+      return <Redirect to="/login" />;
+    }
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
