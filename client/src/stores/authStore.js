@@ -40,7 +40,7 @@ class SignInStore {
     console.log(exp, Date.now() / 1000, "just rest");
     if (exp < Date.now() / 1000) {
       localStorage.removeItem("token");
-      window.location.href = "/login";
+      // window.location.href = "/login";
       // window.history.pushState();
     }
     return;

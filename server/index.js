@@ -13,6 +13,8 @@ const jwt = require("jsonwebtoken");
 const { initializePassport } = require("./passportConfig");
 
 const authRouter = require("./src/routes/auth");
+const postRouter = require("./src/routes/post");
+const profileRouter = require("./src/routes/profile");
 
 initializePassport(passport);
 
@@ -40,6 +42,8 @@ app.use(flash());
 
 //testing route
 app.use("/api", authRouter);
+app.use("/api", postRouter);
+app.use("/api", profileRouter);
 
 // app.get("logout", (req, res) => {
 //   req.logOut();

@@ -9,6 +9,28 @@ const viewProfile = async (req, res, next) => {
         message: "You don't have access, please login",
       });
     }
-    await pool.query(`SELECT * FROM users WHERE email = $1`);
-  } catch (error) {}
+    console.log(req.params, "not alone");
+    await pool.query(
+      `SELECT * FROM users WHERE username = $1`,
+      [req.params.id],
+      async (err, results) => {
+        if (err) {
+          throw err;
+        }
+
+        if (results.rowCount.length > 0) {
+          errors.push({ message: "Email already registered" });
+          res.status(403).json(errors);
+        } else {
+          res.json({
+            data: results.rows,
+          });
+        }
+      }
+    );
+  } catch (error) {
+    throw next(error);
+  }
 };
+
+module.exports = { viewProfile };

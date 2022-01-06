@@ -1,10 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
-const session = require("express-session");
-const flash = require("express-flash");
-const passport = require("passport");
-const cookieParser = require("cookie-parser");
 
 const {
   registerController,

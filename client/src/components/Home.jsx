@@ -40,13 +40,6 @@ class Home extends Component {
   }
 
   render() {
-    const token = localStorage.getItem("user_token");
-
-    if (token) {
-      this.props.signIn.verifyTokenValidity(token);
-    } else {
-      return <Redirect to="/login" />;
-    }
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
