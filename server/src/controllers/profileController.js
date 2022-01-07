@@ -19,7 +19,7 @@ const viewProfile = async (req, res, next) => {
         }
 
         if (results.rowCount.length > 0) {
-          errors.push({ message: "Email already registered" });
+          errors.push({ message: "Not found" });
           res.status(403).json(errors);
         } else {
           res.json({
@@ -33,4 +33,37 @@ const viewProfile = async (req, res, next) => {
   }
 };
 
-module.exports = { viewProfile };
+const editUsername = async (req, res, next) => {
+  try {
+    let errors = [];
+    let { username, user_id } = req.body;
+    if (!username) {
+      errors.push({
+        message: "You don't have access, please login",
+      });
+    }
+    console.log(req.params, "not alone");
+    await pool.query(
+      `UPDATE profile SET username = $1 WHERE user_id = $2`,
+      [username, user_id],
+      async (err, results) => {
+        if (err) {
+          throw err;
+        }
+
+        if (results.rowCount.length > 0) {
+          errors.push({ message: "Not found" });
+          res.status(403).json(errors);
+        } else {
+          res.json({
+            data: results.rows,
+          });
+        }
+      }
+    );
+  } catch (error) {
+    throw next(error);
+  }
+};
+
+module.exports = { viewProfile, editUsername };
