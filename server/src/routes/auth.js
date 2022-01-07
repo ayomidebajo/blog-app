@@ -6,7 +6,9 @@ const {
   registerController,
   loginController,
   logOut,
+  changePassword,
 } = require("../controllers/authController");
+const { authenticateToken } = require("../JWT/issueJWT");
 
 const router = express.Router();
 
@@ -38,6 +40,7 @@ router.get("/login", async (req, res) => {
 });
 
 router.post("/login", loginController);
+router.post("/change-password", authenticateToken, changePassword);
 
 router.get("logout", logOut);
 

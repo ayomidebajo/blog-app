@@ -101,6 +101,10 @@ const loginController = async (req, res, next) => {
               httpOnly: true,
             });
             res.json({ token: token, username: results.rows[0].username });
+          } else {
+            res.json({
+              data: "incorrect password or email",
+            });
           }
           //  60 * 60 * 24 * 1 * 1000,
         } else {
@@ -113,8 +117,58 @@ const loginController = async (req, res, next) => {
   }
 };
 
-const logOut = async (req, res) => {
+const logOut = async (req, res, next) => {
   req.logOut();
+  next();
 };
 
-module.exports = { registerController, loginController, logOut };
+const changePassword = async (req, res, next) => {
+  try {
+    let { oldPassword, newPassword, username } = req.body;
+    await pool.query(
+      `SELECT * FROM users WHERE username = $1`,
+      [username],
+      async (err, results) => {
+        if (err) {
+          throw err;
+        }
+
+        if (results.rows.length > 0) {
+          if (
+            results.rows[0] &&
+            bcrypt.compareSync(oldPassword, results.rows[0].password)
+          ) {
+            if (oldPassword !== newPassword) {
+              let hashedPassword = await bcrypt.hash(newPassword, 10);
+
+              await pool.query(
+                `UPDATE users SET password = $1 WHERE username = $2`,
+                [hashedPassword, username]
+              );
+            }
+            res.json({
+              data: "Password changed sucessfully",
+            });
+          } else {
+            res.json({
+              data: "new passwords can't be the same as the old password",
+            });
+          }
+
+          //  60 * 60 * 24 * 1 * 1000,
+        } else {
+          res.status(404).json({ message: "user does not exist" });
+        }
+      }
+    );
+  } catch (error) {
+    return next(error);
+  }
+};
+
+module.exports = {
+  registerController,
+  loginController,
+  logOut,
+  changePassword,
+};
