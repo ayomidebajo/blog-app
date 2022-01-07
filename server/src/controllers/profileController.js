@@ -44,7 +44,7 @@ const editUsername = async (req, res, next) => {
     }
     console.log(req.params, "not alone");
     await pool.query(
-      `UPDATE profile SET username = $1 WHERE user_id = $2`,
+      `UPDATE profile SET user_name = $1 WHERE user_id = $2`,
       [username, user_id],
       async (err, results) => {
         if (err) {
@@ -56,7 +56,7 @@ const editUsername = async (req, res, next) => {
           res.status(403).json(errors);
         } else {
           res.json({
-            data: results.rows,
+            data: "Username updated successfully!",
           });
         }
       }

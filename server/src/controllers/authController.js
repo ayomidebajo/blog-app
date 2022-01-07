@@ -59,7 +59,7 @@ const registerController = async (req, res, next) => {
                 if (err) {
                   throw err;
                 }
-                createProfile(res.rows[0].id);
+                createProfile(res.rows[0].id, username);
               }
             );
 

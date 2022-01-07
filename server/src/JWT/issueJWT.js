@@ -10,7 +10,7 @@ function authenticateToken(req, res, next) {
   const token = authHeader && authHeader.split(" ")[1];
 
   if (!token)
-    return res.sendStatus(403).send("A token is required for authentication");
+    return res.statusCode(403).send("A token is required for authentication");
 
   jwt.verify(token, process.env.SECRET, (err, user) => {
     if (err) return res.sendStatus(401).send("Invalid token");
