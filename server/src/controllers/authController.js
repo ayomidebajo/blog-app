@@ -1,8 +1,6 @@
 const pool = require("../../db/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { initializePassport } = require("../../passportConfig");
-const { generateAccessToken, authenticateToken } = require("../JWT/issueJWT");
 const date = require("date-and-time");
 const { v4: uuidv4 } = require("uuid");
 const createProfile = require("../utils/createProfile");

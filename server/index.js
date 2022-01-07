@@ -3,15 +3,11 @@ const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
 const cors = require("cors");
-const pool = require("./db/db");
-const bcrypt = require("bcrypt");
 const session = require("express-session");
 const flash = require("express-flash");
 const passport = require("passport");
 const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
 const { initializePassport } = require("./passportConfig");
-
 const authRouter = require("./src/routes/auth");
 const postRouter = require("./src/routes/post");
 const profileRouter = require("./src/routes/profile");
