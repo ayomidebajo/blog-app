@@ -1,6 +1,4 @@
 const pool = require("../../db/db");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 const date = require("date-and-time");
 const { v4: uuidv4 } = require("uuid");
 
