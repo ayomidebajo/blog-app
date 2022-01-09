@@ -43,4 +43,36 @@ const createPost = async (req, res, next) => {
   }
 };
 
-module.exports = { createPost };
+const createComment = async (req, res, next) => {
+  try {
+    let { user_id, body } = req.body;
+    let now = new Date();
+    await pool.query(
+      `INSERT INTO comments (user_id, body, post_id, created_on) VALUES ($1, $2, $3, $4)`,
+      [user_id, body, uuidv4(), date.format(now, "YYYY/MM/DD HH:mm:ss")],
+      async (err, results) => {
+        if (err) {
+          throw err;
+        }
+
+        await pool.query(
+          `SELECT * FROM comments`,
+
+          async (err, results) => {
+            if (err) {
+              throw err;
+            }
+
+            res.json({
+              data: results.rows,
+            });
+          }
+        );
+      }
+    );
+  } catch (error) {
+    throw next(error);
+  }
+};
+
+module.exports = { createPost, createComment };
