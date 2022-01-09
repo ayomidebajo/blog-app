@@ -26,20 +26,27 @@ class SignInStore {
     const res = fromPromise(
       axios.post("http://localhost:5000/api/login", content)
     );
-    console.log(res.value, "uhm");
+    // console.log(res.value, "uhm");
     res.then((rest) => {
-      const { token } = rest.data;
-      const { username } = rest.data;
-      this.user = username;
-      localStorage.setItem("user_token", token);
-      window.location.href = "/";
+      try {
+        console.log(rest, "rest data");
+        const { token } = rest.data;
+        const { username } = rest.data;
+
+        this.user = username;
+        localStorage.setItem("user_token", token);
+        window.location.href = "/";
+      } catch (error) {
+        console.log(error, "errors");
+      }
     });
   };
   @action verifyTokenValidity = (token) => {
     let { exp } = decode(token);
     console.log(exp, Date.now() / 1000, "just rest");
     if (exp < Date.now() / 1000) {
-      localStorage.removeItem("token");
+      localStorage.removeItem("user_token");
+      console.log("true");
       // window.location.href = "/login";
       // window.history.pushState();
     }

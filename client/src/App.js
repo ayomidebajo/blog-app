@@ -17,13 +17,6 @@ import Home from "./components/Home";
 @observer
 class App extends Component {
   render() {
-    const token = localStorage.getItem("user_token");
-
-    if (token) {
-      this.props.signIn.verifyTokenValidity(token);
-    } else {
-      return <Redirect to="/login" />;
-    }
     return (
       <Router>
         <Switch>

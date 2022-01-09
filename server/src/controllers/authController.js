@@ -100,7 +100,7 @@ const loginController = async (req, res, next) => {
             });
             res.json({ token: token, username: results.rows[0].username });
           } else {
-            res.json({
+            res.status(401).json({
               data: "incorrect password or email",
             });
           }
