@@ -3,15 +3,15 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { authenticateToken } = require("../JWT/issueJWT");
 
-const { createPost, createComment } = require("../controllers/postController");
+const {
+  createPost,
+  createComment,
+  getPosts,
+} = require("../controllers/postController");
 
 const router = express.Router();
 
-router.get("/posts", authenticateToken, (req, res) => {
-  res.json({
-    post: "posts",
-  });
-});
+router.get("/posts", authenticateToken, getPosts);
 
 router.post("/create-post", authenticateToken, createPost);
 router.post("/create-comment", authenticateToken, createComment);

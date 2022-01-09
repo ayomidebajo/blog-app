@@ -75,4 +75,34 @@ const createComment = async (req, res, next) => {
   }
 };
 
-module.exports = { createPost, createComment };
+const getPosts = async (req, res, next) => {
+  try {
+    await pool.query(
+      `SELECT * FROM posts`,
+
+      async (err, results) => {
+        if (err) {
+          throw err;
+        }
+
+        res.json({
+          data: results.rows,
+        });
+      }
+    );
+  } catch (error) {
+    throw next(error);
+  }
+};
+
+const addLike = async (req, res, next) => {
+  try {
+  } catch (error) {}
+};
+
+const removeLike = async (req, res, next) => {
+  try {
+  } catch (error) {}
+};
+
+module.exports = { createPost, createComment, addLike, removeLike, getPosts };
