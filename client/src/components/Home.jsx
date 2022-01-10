@@ -48,6 +48,11 @@ class Home extends Component {
       return <Redirect to="/login" />;
     }
 
+    //Fix navbar
+    //make queries to get posts
+    //add Addpost component
+    // Add remirror editor
+
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
