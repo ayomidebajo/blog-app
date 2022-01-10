@@ -12,6 +12,8 @@ class SignUpStore {
     let content = { email, username, password, confirmPassword };
     // eslint-disable-next-line no-unused-vars
     const res = await axios.post("http://localhost:5000/api/register", content);
+    //Add check for register failure
+    // window.location.href = "/login";
   };
 }
 
@@ -46,7 +48,6 @@ class SignInStore {
     console.log(exp, Date.now() / 1000, "just rest");
     if (exp < Date.now() / 1000) {
       localStorage.removeItem("user_token");
-      console.log("true");
       // window.location.href = "/login";
       // window.history.pushState();
     }

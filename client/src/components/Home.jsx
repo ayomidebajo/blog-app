@@ -47,6 +47,7 @@ class Home extends Component {
     } else {
       return <Redirect to="/login" />;
     }
+
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
