@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import { Link, Redirect, Switch, Route } from "react-router-dom";
-import Dashboard from "./Dashboard";
-import AddPost from "./AddPost";
+import { Link } from "react-router-dom";
 
 @inject("signIn", "signUp", "post")
 // Add the signin state
 
 @observer
-class Home extends Component {
+class AddPost extends Component {
   navContainer = React.createRef(null);
   state = {
     isVisble: false,
@@ -39,20 +37,8 @@ class Home extends Component {
     if (this.navContainer.current) {
       observer.observe(this.navContainer.current);
     }
-    this.props.post.getPosts();
   }
-
   render() {
-    // const token = localStorage.getItem("user_token");
-
-    // if (token) {
-    //   this.props.signIn.verifyTokenValidity(token);
-    // } else {
-    //   return <Redirect to="/login" />;
-    // }
-
-    // Add remirror editor
-
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
@@ -93,37 +79,15 @@ class Home extends Component {
             </ul>
           </div>
         </div>
-        <div className="container-sm">
-          <div className="p-3">
-            <div className="row">
-              <div className="card" style={{ width: "100%" }}>
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    Card subtitle
-                  </h6>
-                  <p className="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Esse harum pariatur omnis, beatae nullLink dolore magni quam
-                    officiLink autem, possimus tenetur veniam debitis ducimus
-                    aspernatur rerum ratione sint? Reprehenderit, eum!
-                  </p>
-                  <Link to="#" className="card-link">
-                    Ayomide Bajo
-                  </Link>
-                  <Link to="#" className="card-link">
-                    23-11-21
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div className="">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
+          voluptatum cum voluptatem saepe. Amet neque cupiditate minima iusto
+          officia! Modi laudantium quaerat cumque dolor ea voluptates illum
+          fugit placeat minus. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Dolorem quo beatae id, nisi repellendus quaerat
+          asperiores quidem nostrum? Quisquam suscipit explicabo quia ducimus
+          perspiciatis facilis sunt animi cumque aliquid iure.
         </div>
-
-        <Switch>
-          <Route component={Dashboard} path="/" />
-          <Route component={AddPost} path="/posts" />
-        </Switch>
 
         <div className="row mt-5 container mx-auto bottom-menu">
           <div className="col-lg-4 mt-3">
@@ -196,4 +160,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default AddPost;
