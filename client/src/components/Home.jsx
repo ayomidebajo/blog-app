@@ -49,7 +49,8 @@ class Home extends Component {
     //   return <Redirect to="/login" />;
     // }
 
-    // Add remirror editor
+    //test create post endpoint
+    //add bold, italics, header, list, block quotes features, and more into editor
 
     return (
       <div className="main--container">
