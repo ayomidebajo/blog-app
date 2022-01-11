@@ -11,8 +11,9 @@ class postStore {
   @action getPosts = async () => {
     const res = fromPromise(axios("http://localhost:5000/api/posts"));
     res.then((results) => {
+      console.log(results, "i heard");
       try {
-        this.posts = results.data;
+        this.posts = results.data.data;
       } catch (error) {
         console.log(error, "post error");
       }

@@ -2,6 +2,7 @@ import { makeObservable, observable, action } from "mobx";
 import { fromPromise } from "mobx-utils";
 import axios from "axios";
 import decode from "jwt-decode";
+import setAuthToken from "../utils/setAuthToken";
 
 class SignUpStore {
   constructor() {
@@ -51,6 +52,7 @@ class SignInStore {
       // window.location.href = "/login";
       // window.history.pushState();
     }
+    setAuthToken(token);
     return;
   };
   get user() {
