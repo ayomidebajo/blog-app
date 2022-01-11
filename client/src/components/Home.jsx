@@ -5,8 +5,6 @@ import Dashboard from "./Dashboard";
 import AddPost from "./AddPost";
 
 @inject("signIn", "signUp", "post")
-// Add the signin state
-
 @observer
 class Home extends Component {
   navContainer = React.createRef(null);

@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import { Link } from "react-router-dom";
+import { Editor, EditorState } from "draft-js";
+import "draft-js/dist/Draft.css";
+
+// import { Link } from "react-router-dom";
 
 @inject("signIn", "signUp", "post")
 // Add the signin state
@@ -10,6 +13,7 @@ class AddPost extends Component {
   navContainer = React.createRef(null);
   state = {
     isVisble: false,
+    editorState: EditorState.createEmpty(),
   };
 
   callBackFunction = (entries) => {
@@ -27,6 +31,13 @@ class AddPost extends Component {
       threshold: [0.0, 1.0],
     };
     return options;
+  };
+
+  onChange = (editorState) => {
+    this.setState({
+      ...this.state,
+      editorState,
+    });
   };
 
   componentDidMount() {
@@ -79,14 +90,11 @@ class AddPost extends Component {
             </ul>
           </div>
         </div>
-        <div className="">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque
-          voluptatum cum voluptatem saepe. Amet neque cupiditate minima iusto
-          officia! Modi laudantium quaerat cumque dolor ea voluptates illum
-          fugit placeat minus. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Dolorem quo beatae id, nisi repellendus quaerat
-          asperiores quidem nostrum? Quisquam suscipit explicabo quia ducimus
-          perspiciatis facilis sunt animi cumque aliquid iure.
+        <div className="container container-editor">
+          <Editor
+            editorState={this.state.editorState}
+            onChange={this.onChange}
+          />
         </div>
 
         <div className="row mt-5 container mx-auto bottom-menu">
