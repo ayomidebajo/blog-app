@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import { Editor, EditorState } from "draft-js";
+import { Link } from "react-router-dom";
 import "draft-js/dist/Draft.css";
 
 // import { Link } from "react-router-dom";
@@ -84,8 +85,25 @@ class AddPost extends Component {
                 </div>
               </li>
 
-              <li className="navbar-link">
-                <div className="avatar"></div>
+              <li className="navbar-link dropdown">
+                <div
+                  className="avatar dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                ></div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <Link class="dropdown-item" to="/posts">
+                    Create post
+                  </Link>
+                  <Link class="dropdown-item" href="#">
+                    Dashboard
+                  </Link>
+                  <Link class="dropdown-item" href="#">
+                    Change Username
+                  </Link>
+                </div>
               </li>
             </ul>
           </div>

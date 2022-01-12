@@ -41,16 +41,16 @@ class Home extends Component {
   }
 
   render() {
-    // const token = localStorage.getItem("user_token");
+    const token = localStorage.getItem("user_token");
 
-    // if (token) {
-    //   this.props.signIn.verifyTokenValidity(token);
-    // } else {
-    //   return <Redirect to="/login" />;
-    // }
+    if (token) {
+      this.props.signIn.verifyTokenValidity(token);
+    } else {
+      return <Redirect to="/login" />;
+    }
 
     //test create post endpoint
-    //add bold, italics, header, list, block quotes features, and more into editor
+    //Linkdd bold, italics, header, list, block quotes features, and more into editor
 
     return (
       <div className="main--container">
@@ -86,8 +86,25 @@ class Home extends Component {
                 </div>
               </li>
 
-              <li className="navbar-link">
-                <div className="avatar"></div>
+              <li className="navbar-link dropdown">
+                <div
+                  className="avatar dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                ></div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <Link class="dropdown-item" to="/posts">
+                    Create post
+                  </Link>
+                  <Link class="dropdown-item" href="#">
+                    Dashboard
+                  </Link>
+                  <Link class="dropdown-item" href="#">
+                    Change Username
+                  </Link>
+                </div>
               </li>
             </ul>
           </div>
