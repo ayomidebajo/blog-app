@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import { Editor, EditorState } from "draft-js";
+import { Editor, EditorState, RichUtils } from "draft-js";
 import { Link } from "react-router-dom";
 import "draft-js/dist/Draft.css";
 
@@ -24,6 +24,34 @@ class AddPost extends Component {
       isVisble: !entry.isIntersecting,
     });
   };
+
+  _onBoldClick() {
+    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "BOLD"));
+  }
+
+  _onCodeCLick() {
+    this.onChange(RichUtils.toggleInlineStyle(this.state.editorState, "CODE"));
+  }
+
+  _onItalickClick() {
+    this.onChange(
+      RichUtils.toggleInlineStyle(this.state.editorState, "ITALIC")
+    );
+  }
+
+  _onStrikeThroughClick() {
+    this.onChange(
+      RichUtils.toggleInlineStyle(this.state.editorState, "STRIKETHROUGH")
+    );
+  }
+
+  _onUnderLineClick() {
+    this.onChange(
+      RichUtils.toggleInlineStyle(this.state.editorState, "UNDERLINE")
+    );
+  }
+
+  //  type DraftInlineStyleType = 'BOLD' | 'CODE' | 'ITALIC' | 'STRIKETHROUGH' | 'UNDERLINE';
 
   optionsFunc = () => {
     let options = {
@@ -109,6 +137,36 @@ class AddPost extends Component {
           </div>
         </div>
         <div className="container container-editor">
+          <button
+            onClick={this._onBoldClick.bind(this)}
+            style={{ width: "20px" }}
+          >
+            B
+          </button>
+          <button
+            onClick={this._onCodeCLick.bind(this)}
+            style={{ width: "20px" }}
+          >
+            C
+          </button>
+          <button
+            onClick={this._onItalickClick.bind(this)}
+            style={{ width: "20px" }}
+          >
+            T
+          </button>
+          <button
+            onClick={this._onStrikeThroughClick.bind(this)}
+            style={{ width: "20px" }}
+          >
+            S
+          </button>
+          <button
+            onClick={this._onUnderLineClick.bind(this)}
+            style={{ width: "20px" }}
+          >
+            U
+          </button>
           <Editor
             editorState={this.state.editorState}
             onChange={this.onChange}
