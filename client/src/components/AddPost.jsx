@@ -6,8 +6,10 @@ import "draft-js/dist/Draft.css";
 
 // import { Link } from "react-router-dom";
 
-@inject("signIn", "signUp", "post")
-// Add the signin state
+@inject("post")
+//Fix buttons layout
+// create post
+// change Card UI
 
 @observer
 class AddPost extends Component {
