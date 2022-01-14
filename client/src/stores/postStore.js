@@ -20,6 +20,20 @@ class postStore {
       }
     });
   };
+  @action createPost = async (content) => {
+    const res = fromPromise(
+      axios.post("http://localhost:5000/api/create-post", content)
+    );
+    res.then((results) => {
+      console.log(results, "i heard");
+      try {
+        this.posts = results.data.data;
+        console.log(results.data.data, "data");
+      } catch (error) {
+        console.log(error, "post error");
+      }
+    });
+  };
 }
 
 const post = new postStore();

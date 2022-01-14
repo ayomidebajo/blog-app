@@ -25,6 +25,7 @@ class AddPost extends Component {
   state = {
     isVisble: false,
     editorState: EditorState.createEmpty(),
+    publish: true,
   };
 
   callBackFunction = (entries) => {
@@ -74,7 +75,7 @@ class AddPost extends Component {
 
   createPost = debounce((content) => {
     console.log(content, "from createPost");
-  }, 2000);
+  }, 1000);
 
   onChange = (editorState) => {
     const contentState = editorState.getCurrentContent();
@@ -92,6 +93,8 @@ class AddPost extends Component {
     );
     if (this.navContainer.current) {
       observer.observe(this.navContainer.current);
+    } else {
+      return null;
     }
   }
   render() {
@@ -189,6 +192,18 @@ class AddPost extends Component {
             editorState={this.state.editorState}
             onChange={this.onChange}
           />
+        </div>
+        <div className="">
+          <button
+            onClick={() => {
+              this.setState({
+                ...this.state,
+                publish: !this.state.publish,
+              });
+            }}
+          >
+            publish
+          </button>
         </div>
 
         <div className="row mt-5 container mx-auto bottom-menu">
