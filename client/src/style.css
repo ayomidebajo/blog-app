@@ -72,4 +72,16 @@
   border-radius: 0.25rem;
 }
 
+.editor-style-btn__container {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+}
+
+.editor-style-btn {
+  width: 30px;
+  background-color: white;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
 /* bootstrap */

@@ -1,8 +1,16 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import { Editor, EditorState, RichUtils } from "draft-js";
+import {
+  Editor,
+  EditorState,
+  RichUtils,
+  ContentState,
+  ContentBlock,
+  convertToRaw,
+} from "draft-js";
 import { Link } from "react-router-dom";
 import "draft-js/dist/Draft.css";
+import debounce from "lodash/debounce";
 
 // import { Link } from "react-router-dom";
 
@@ -64,7 +72,13 @@ class AddPost extends Component {
     return options;
   };
 
+  createPost = debounce((content) => {
+    console.log(content, "from createPost");
+  }, 2000);
+
   onChange = (editorState) => {
+    const contentState = editorState.getCurrentContent();
+    this.createPost(convertToRaw(contentState));
     this.setState({
       ...this.state,
       editorState,
@@ -139,36 +153,38 @@ class AddPost extends Component {
           </div>
         </div>
         <div className="container container-editor">
-          <button
-            onClick={this._onBoldClick.bind(this)}
-            style={{ width: "20px" }}
-          >
-            B
-          </button>
-          <button
-            onClick={this._onCodeCLick.bind(this)}
-            style={{ width: "20px" }}
-          >
-            C
-          </button>
-          <button
-            onClick={this._onItalickClick.bind(this)}
-            style={{ width: "20px" }}
-          >
-            T
-          </button>
-          <button
-            onClick={this._onStrikeThroughClick.bind(this)}
-            style={{ width: "20px" }}
-          >
-            S
-          </button>
-          <button
-            onClick={this._onUnderLineClick.bind(this)}
-            style={{ width: "20px" }}
-          >
-            U
-          </button>
+          <div className="editor-style-btn__container">
+            <button
+              onClick={this._onBoldClick.bind(this)}
+              className="editor-style-btn"
+            >
+              B
+            </button>
+            <button
+              onClick={this._onCodeCLick.bind(this)}
+              className="editor-style-btn"
+            >
+              C
+            </button>
+            <button
+              onClick={this._onItalickClick.bind(this)}
+              className="editor-style-btn"
+            >
+              T
+            </button>
+            <button
+              onClick={this._onStrikeThroughClick.bind(this)}
+              className="editor-style-btn"
+            >
+              S
+            </button>
+            <button
+              onClick={this._onUnderLineClick.bind(this)}
+              className="editor-style-btn"
+            >
+              U
+            </button>
+          </div>
           <Editor
             editorState={this.state.editorState}
             onChange={this.onChange}

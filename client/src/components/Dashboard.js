@@ -13,21 +13,14 @@ class Dashboard extends Component {
               <div className="col-lg-4" key={item.id}>
                 <div className="card mt-2 mt-lg-2" style={{ width: "100%" }}>
                   <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">
-                      Card subtitle
-                    </h6>
-                    <p className="card-text">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Esse harum pariatur omnis, beatae nullLink dolore magni
-                      quam officiLink autem, possimus tenetur veniam debitis
-                      ducimus aspernatur rerum ratione sint? Reprehenderit, eum!
-                    </p>
+                    <h5 className="card-title">{item.title}</h5>
+
+                    <p className="card-text">{item.body}</p>
                     <Link to="#" className="card-link">
-                      Ayomide Bajo
+                      {item.author}
                     </Link>
                     <Link to="#" className="card-link">
-                      23-11-21
+                      {item.created_at}
                     </Link>
                   </div>
                 </div>

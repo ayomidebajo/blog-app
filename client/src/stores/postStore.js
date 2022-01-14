@@ -14,6 +14,7 @@ class postStore {
       console.log(results, "i heard");
       try {
         this.posts = results.data.data;
+        console.log(results.data.data, "data");
       } catch (error) {
         console.log(error, "post error");
       }
