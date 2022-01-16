@@ -4,6 +4,7 @@ import axios from "axios";
 
 class postStore {
   @observable posts = [];
+  // body, title, author, draft
   constructor() {
     makeObservable(this);
   }

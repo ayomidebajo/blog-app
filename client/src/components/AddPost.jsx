@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
-import createEmojiPlugin from "draft-js-emoji-plugin";
-import "draft-js-emoji-plugin/lib/plugin.css";
+// import createEmojiPlugin from "draft-js-emoji-plugin";
+// import "draft-js-emoji-plugin/lib/plugin.css";
 import { Link } from "react-router-dom";
 import "draft-js/dist/Draft.css";
 import debounce from "lodash/debounce";
@@ -71,14 +71,31 @@ class AddPost extends Component {
 
   createPost = debounce((content) => {
     console.log(content, "from createPost");
+    let obj = {
+      title: this.state.title,
+      body: content.blocks,
+      author: "amila",
+      draft: false,
+    };
+    console.log(obj, "submit");
+    this.props.post.createPost(obj);
   }, 1000);
 
   onChange = (editorState) => {
     const contentState = editorState.getCurrentContent();
-    this.createPost(convertToRaw(contentState));
+    if (this.state.publish) {
+      this.createPost(convertToRaw(contentState));
+    }
     this.setState({
       ...this.state,
       editorState,
+    });
+  };
+
+  onChangeTitle = (e) => {
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -94,8 +111,8 @@ class AddPost extends Component {
     }
   }
   render() {
-    const imagePlugin = createEmojiPlugin();
-    const { EmojiSuggestions } = imagePlugin;
+    // const imagePlugin = createEmojiPlugin();
+    // const { EmojiSuggestions } = imagePlugin;
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
@@ -161,6 +178,7 @@ class AddPost extends Component {
             <textarea
               name="title"
               id=""
+              onChange={this.onChangeTitle}
               cols="30"
               rows="10"
               className="title-input"

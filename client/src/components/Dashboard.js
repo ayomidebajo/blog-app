@@ -15,7 +15,7 @@ class Dashboard extends Component {
                   <div className="card-body">
                     <h5 className="card-title">{item.title}</h5>
 
-                    <p className="card-text">{item.body}</p>
+                    <p className="card-text">{item.body.text}</p>
                     <Link to="#" className="card-link">
                       {item.author}
                     </Link>
