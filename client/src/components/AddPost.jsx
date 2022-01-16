@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import {
-  Editor,
-  EditorState,
-  RichUtils,
-  ContentState,
-  ContentBlock,
-  convertToRaw,
-} from "draft-js";
+import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
+import createEmojiPlugin from "draft-js-emoji-plugin";
+import "draft-js-emoji-plugin/lib/plugin.css";
 import { Link } from "react-router-dom";
 import "draft-js/dist/Draft.css";
 import debounce from "lodash/debounce";
@@ -98,6 +93,8 @@ class AddPost extends Component {
     }
   }
   render() {
+    const imagePlugin = createEmojiPlugin();
+    const { EmojiSuggestions } = imagePlugin;
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
@@ -155,43 +152,57 @@ class AddPost extends Component {
             </ul>
           </div>
         </div>
-        <div className="container container-editor">
-          <div className="editor-style-btn__container">
-            <button
-              onClick={this._onBoldClick.bind(this)}
-              className="editor-style-btn"
-            >
-              B
-            </button>
-            <button
-              onClick={this._onCodeCLick.bind(this)}
-              className="editor-style-btn"
-            >
-              C
-            </button>
-            <button
-              onClick={this._onItalickClick.bind(this)}
-              className="editor-style-btn"
-            >
-              T
-            </button>
-            <button
-              onClick={this._onStrikeThroughClick.bind(this)}
-              className="editor-style-btn"
-            >
-              S
-            </button>
-            <button
-              onClick={this._onUnderLineClick.bind(this)}
-              className="editor-style-btn"
-            >
-              U
-            </button>
+        <div className="container">
+          <div className="container-editor">
+            <textarea
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              className="title-input"
+              placeholder="Add title here"
+            />
+            <div className="editor-style-btn__container">
+              <div className="editor-style-btn__child">
+                <button
+                  onClick={this._onBoldClick.bind(this)}
+                  className="editor-style-btn"
+                >
+                  B
+                </button>
+                <button
+                  onClick={this._onCodeCLick.bind(this)}
+                  className="editor-style-btn"
+                >
+                  C
+                </button>
+                <button
+                  onClick={this._onItalickClick.bind(this)}
+                  className="editor-style-btn"
+                >
+                  T
+                </button>
+                <button
+                  onClick={this._onStrikeThroughClick.bind(this)}
+                  className="editor-style-btn"
+                >
+                  S
+                </button>
+                <button
+                  onClick={this._onUnderLineClick.bind(this)}
+                  className="editor-style-btn"
+                >
+                  U
+                </button>
+              </div>
+            </div>
+
+            <Editor
+              editorState={this.state.editorState}
+              onChange={this.onChange}
+              plugins={[imagePlugin]}
+            />
           </div>
-          <Editor
-            editorState={this.state.editorState}
-            onChange={this.onChange}
-          />
         </div>
         <div className="">
           <button

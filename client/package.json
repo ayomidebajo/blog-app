@@ -26,6 +26,8 @@
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
     "draft-js": "^0.11.7",
+    "draft-js-emoji-plugin": "2.0.0-rc2",
+    "draft-js-plugins-editor": "2.0.0-rc2",
     "eslint": "^7.11.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.2.0",
