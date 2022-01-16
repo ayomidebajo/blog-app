@@ -73,11 +73,11 @@ const registerController = async (req, res, next) => {
 
 const loginController = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
     await pool.query(
-      `SELECT * FROM users WHERE email = $1`,
-      [email],
+      `SELECT * FROM users WHERE username = $1`,
+      [username],
       (err, results) => {
         if (err) {
           throw err;
@@ -91,7 +91,7 @@ const loginController = async (req, res, next) => {
             const options = {
               expiresIn: "2 days",
             };
-            const token = jwt.sign({ user: email }, process.env.SECRET, {
+            const token = jwt.sign({ user: username }, process.env.SECRET, {
               expiresIn: "2days",
             });
             res.cookie("token", token, {

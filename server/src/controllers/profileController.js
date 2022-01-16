@@ -9,6 +9,12 @@ const viewProfile = async (req, res, next) => {
         message: "You don't have access, please login",
       });
     }
+
+    if (errors.length > 0) {
+      res.status(404).json({
+        message: errors.message,
+      });
+    }
     console.log(req.params, "not alone");
     await pool.query(
       `SELECT * FROM users WHERE username = $1`,
@@ -19,10 +25,7 @@ const viewProfile = async (req, res, next) => {
         }
 
         if (results.rowCount.length > 0) {
-          errors.push({ message: "Not found" });
-          res.status(403).json(errors);
-        } else {
-          res.json({
+          res.status(200).json({
             data: results.rows,
           });
         }

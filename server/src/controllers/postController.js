@@ -85,7 +85,7 @@ const getPosts = async (req, res, next) => {
         if (err) {
           throw err;
         }
-
+        console.log(results.rows, "res");
         res.json({
           data: results.rows,
         });

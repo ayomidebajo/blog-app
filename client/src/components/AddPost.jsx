@@ -10,9 +10,9 @@ import debounce from "lodash/debounce";
 // import { Link } from "react-router-dom";
 
 @inject("post")
-//Fix buttons layout
 // create post
 // change Card UI
+//get profile
 
 @observer
 class AddPost extends Component {
@@ -21,6 +21,7 @@ class AddPost extends Component {
     isVisble: false,
     editorState: EditorState.createEmpty(),
     publish: true,
+    title: "",
   };
 
   callBackFunction = (entries) => {
@@ -82,12 +83,12 @@ class AddPost extends Component {
   };
 
   componentDidMount() {
-    const observer = new IntersectionObserver(
+    const observerNav = new IntersectionObserver(
       this.callBackFunction,
       this.optionsFunc
     );
     if (this.navContainer.current) {
-      observer.observe(this.navContainer.current);
+      observerNav.observe(this.navContainer.current);
     } else {
       return null;
     }
@@ -137,14 +138,17 @@ class AddPost extends Component {
                   data-toggle="dropdown"
                   aria-expanded="false"
                 ></div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <Link class="dropdown-item" to="/posts">
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <Link className="dropdown-item" to="/posts">
                     Create post
                   </Link>
-                  <Link class="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="/">
                     Dashboard
                   </Link>
-                  <Link class="dropdown-item" href="#">
+                  <Link className="dropdown-item" to="#">
                     Change Username
                   </Link>
                 </div>
@@ -155,7 +159,7 @@ class AddPost extends Component {
         <div className="container">
           <div className="container-editor">
             <textarea
-              name=""
+              name="title"
               id=""
               cols="30"
               rows="10"
@@ -174,13 +178,13 @@ class AddPost extends Component {
                   onClick={this._onCodeCLick.bind(this)}
                   className="editor-style-btn"
                 >
-                  C
+                  &lt; &gt;
                 </button>
                 <button
                   onClick={this._onItalickClick.bind(this)}
                   className="editor-style-btn"
                 >
-                  T
+                  <em>I</em>
                 </button>
                 <button
                   onClick={this._onStrikeThroughClick.bind(this)}
@@ -190,7 +194,7 @@ class AddPost extends Component {
                 </button>
                 <button
                   onClick={this._onUnderLineClick.bind(this)}
-                  className="editor-style-btn"
+                  className="editor-style-btn text-underline"
                 >
                   U
                 </button>
@@ -200,21 +204,22 @@ class AddPost extends Component {
             <Editor
               editorState={this.state.editorState}
               onChange={this.onChange}
-              plugins={[imagePlugin]}
+              placeholder="Write your blog content here..."
             />
           </div>
-        </div>
-        <div className="">
-          <button
-            onClick={() => {
-              this.setState({
-                ...this.state,
-                publish: !this.state.publish,
-              });
-            }}
-          >
-            publish
-          </button>
+          <div className="mt-5 text-center">
+            <button
+              className="btn-post"
+              onClick={() => {
+                this.setState({
+                  ...this.state,
+                  publish: !this.state.publish,
+                });
+              }}
+            >
+              publish
+            </button>
+          </div>
         </div>
 
         <div className="row mt-5 container mx-auto bottom-menu">

@@ -7,7 +7,7 @@ import { inject, observer } from "mobx-react";
 @observer
 class Signin extends Component {
   state = {
-    email: "",
+    username: "",
     password: "",
     cook: "",
   };
@@ -31,7 +31,7 @@ class Signin extends Component {
       }
     };
 
-    console.log(this.state, this.props.signIn.user, "baby");
+    console.log(this.state, this.props, "baby");
     return (
       <div className="auth--container">
         <div className="row">
@@ -43,8 +43,8 @@ class Signin extends Component {
                   <div className="form-group mt-3">
                     <label htmlFor="exampleInputEmail1">Email address</label>
                     <input
-                      type="email"
-                      name="email"
+                      type="text"
+                      name="username"
                       value={this.state.email}
                       onChange={handleChange}
                       className="form-control"

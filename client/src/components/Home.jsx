@@ -51,7 +51,7 @@ class Home extends Component {
 
     //test create post endpoint
     //Linkdd bold, italics, header, list, block quotes features, and more into editor
-
+    console.log(this.props.signIn.user, "syin");
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
@@ -94,14 +94,17 @@ class Home extends Component {
                   data-toggle="dropdown"
                   aria-expanded="false"
                 ></div>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <Link class="dropdown-item" to="/posts">
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <Link className="dropdown-item" to="/posts">
                     Create post
                   </Link>
-                  <Link class="dropdown-item" href="#">
+                  <Link className="dropdown-item" href="#">
                     Dashboard
                   </Link>
-                  <Link class="dropdown-item" href="#">
+                  <Link className="dropdown-item" href="#">
                     Change Username
                   </Link>
                 </div>
