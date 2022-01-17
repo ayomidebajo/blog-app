@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 
 @inject("post")
 class Dashboard extends Component {
+  //Change cards look
+  //browse for a great color theme
+
   render() {
     return (
       <div className="main-body mt-5">
