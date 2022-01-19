@@ -4,6 +4,11 @@
   font-family: "Manrope", sans-serif;
 }
 
+.auth--container {
+  height: 90vh;
+  padding: 10px;
+}
+
 .form_container {
   width: 100%;
   padding: 10px;
@@ -12,6 +17,20 @@
   align-items: center;
   height: 100%;
   position: relative;
+}
+
+.auth-illustration {
+  object-fit: cover;
+  width: 400px;
+  height: 400px;
+  align-items: center;
+  /* width: 50px;
+  height: 100px; */
+}
+
+.auth-illustration__container {
+  display: flex;
+  align-items: center;
 }
 
 .avatar {

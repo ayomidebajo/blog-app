@@ -33,57 +33,53 @@ class Signin extends Component {
 
     console.log(this.state, this.props, "baby");
     return (
-      <div className="auth--container">
-        <div className="row">
-          <div className="col-lg-6 col-md-6 col-sm-12 m-sm-auto auth-background p-0 d-flex justify-content-center align-items-center">
-            <div className="card auth-card">
-              <div className="card-body">
-                <h5 className="card-title">Sign in</h5>
-                <form onSubmit={handleSubmit}>
-                  <div className="form-group mt-3">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
-                    <input
-                      type="text"
-                      name="username"
-                      value={this.state.email}
-                      onChange={handleChange}
-                      className="form-control"
-                      id="exampleInputEmail1"
-                      aria-describedby="emailHelp"
-                    />
-                    <small id="emailHelp" className="form-text text-muted">
-                      We'll never share your email with anyone else.
-                    </small>
-                  </div>
-                  <div className="form-group my-3">
-                    <label htmlFor="exampleInputPassword1">Password</label>
-                    <input
-                      type="password"
-                      name="password"
-                      value={this.state.password}
-                      onChange={handleChange}
-                      className="form-control"
-                      id="exampleInputPassword1"
-                    />
-                  </div>
+      <div className="auth--container row mt-5">
+        <div className="col-lg-6 col-md-5 col-sm-5 m-sm-auto auth-background p-0 d-flex justify-content-center align-items-center">
+          <div className="card auth-card">
+            <div className="card-body">
+              <h5 className="card-title">Sign in</h5>
+              <form onSubmit={handleSubmit}>
+                <div className="form-group mt-3">
+                  <label htmlFor="exampleInputEmail1">Email address</label>
+                  <input
+                    type="text"
+                    name="username"
+                    value={this.state.email}
+                    onChange={handleChange}
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                  />
+                  <small id="emailHelp" className="form-text text-muted">
+                    We'll never share your email with anyone else.
+                  </small>
+                </div>
+                <div className="form-group my-3">
+                  <label htmlFor="exampleInputPassword1">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={handleChange}
+                    className="form-control"
+                    id="exampleInputPassword1"
+                  />
+                </div>
 
-                  <button type="submit" className="btn btn-primary">
-                    Submit
-                  </button>
-                </form>
-              </div>
+                <button type="submit" className="btn btn-primary">
+                  Submit
+                </button>
+              </form>
             </div>
           </div>
-          <div className="col-lg-6 col-md-6 p-0 auth-illustration">
-            <img
-              src={authIllustration}
-              width="90%"
-              height="90%"
-              alt=""
-              srcSet=""
-              className="d-none d-lg-block d-md-block"
-            />
-          </div>
+        </div>
+        <div className="col-lg-6 col-md-7 p-0 col-sm-7 auth-illustration__container">
+          <img
+            src={authIllustration}
+            alt=""
+            srcSet=""
+            className="d-none d-lg-block d-md-block auth-illustration mx-auto"
+          />
         </div>
       </div>
     );
