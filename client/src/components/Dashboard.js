@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { inject } from "mobx-react";
-import { Link } from "react-router-dom";
 import coffee from "../assets/coffee.jpeg";
 
 @inject("post")
 class Dashboard extends Component {
   //browse for a great color theme
-  //find 20 random default header image or just one illustration for post images
+  //search for 20 random default header image or just one illustration for post images
+  //search for a great footer design
 
   render() {
     const dateHandle = (val) => {
