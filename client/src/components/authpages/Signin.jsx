@@ -73,7 +73,7 @@ class Signin extends Component {
             </div>
           </div>
         </div>
-        <div className="col-lg-6 col-md-7 p-0 col-sm-7 auth-illustration__container">
+        <div className="col-lg-6 col-md-7 p-0  auth-illustration__container">
           <img
             src={authIllustration}
             alt=""

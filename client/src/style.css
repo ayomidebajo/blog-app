@@ -19,13 +19,28 @@
   position: relative;
 }
 
+.img-background__card {
+  padding: 20px;
+}
+
+.featured-post__img {
+  height: 370px;
+  width: 800px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.post__img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+}
+
 .auth-illustration {
   object-fit: cover;
   width: 400px;
   height: 400px;
   align-items: center;
-  /* width: 50px;
-  height: 100px; */
 }
 
 .auth-illustration__container {

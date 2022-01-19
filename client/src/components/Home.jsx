@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import { Link, Redirect, Switch, Route } from "react-router-dom";
+import Carousel from "react-elastic-carousel";
 import Dashboard from "./Dashboard";
 import AddPost from "./AddPost";
+import typewrite from "../assets/typewrite.jpeg";
+import penPc from "../assets/blog.jpg";
+import coffee from "../assets/paper-coffee.jpg";
 
 @inject("signIn", "signUp", "post")
 @observer
@@ -48,10 +52,33 @@ class Home extends Component {
     } else {
       return <Redirect to="/login" />;
     }
-
-    //test create post endpoint
-    //Linkdd bold, italics, header, list, block quotes features, and more into editor
+    //browse for a nice color pallet
     console.log(this.props.signIn.user, "syin");
+
+    const breakPoints = [
+      { width: 1, itemsToShow: 1 },
+      { width: 550, itemsToShow: 1 },
+      { width: 768, itemsToShow: 1 },
+      { width: 1200, itemsToShow: 1 },
+    ];
+
+    const featured_posts = [
+      {
+        imgSrc: typewrite,
+        title: "This is just a type write post",
+        url: "",
+      },
+      {
+        imgSrc: coffee,
+        title: "This is just a coffee post",
+        url: "",
+      },
+      {
+        imgSrc: penPc,
+        title: "This is just a pen pc post",
+        url: "",
+      },
+    ];
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
@@ -113,14 +140,10 @@ class Home extends Component {
           </div>
         </div>
         <div className="container-sm">
-          <div className="p-3">
-            <div className="row">
-              <div className="card" style={{ width: "100%" }}>
+          {/* <div className="card-custom" style={{ width: "100%" }}>
                 <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    Card subtitle
-                  </h6>
+                  <h5 className="card-title">Card Featured</h5>
+
                   <p className="card-text">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Esse harum pariatur omnis, beatae nullLink dolore magni quam
@@ -134,9 +157,45 @@ class Home extends Component {
                     23-11-21
                   </Link>
                 </div>
-              </div>
-            </div>
-          </div>
+              </div> */}
+
+          <Carousel
+            breakPoints={breakPoints}
+            showArrows={false}
+            enableMouseSwipe={true}
+          >
+            {featured_posts.map
+              ? featured_posts.map((item) => (
+                  <div className="card-custom">
+                    <div className="">
+                      <div className="row">
+                        <img
+                          src={item.imgSrc}
+                          alt=""
+                          width="100%"
+                          height="100%"
+                          className="featured-post__img col-lg-9 p-0"
+                        />
+                        <div className="col-lg-3">
+                          <p className="featured-post-title font-weight-bold">
+                            {" "}
+                            {item.title}
+                          </p>
+                          <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing
+                            elit. Nulla voluptas error nam quis fugiat
+                            recusandae eos distinctio, rerum qui? Voluptate
+                            atque deserunt maiores dolores itaque voluptatem cum
+                            explicabo fugit quam?
+                          </p>
+                          <small>19, Jan, 2022</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              : null}
+          </Carousel>
         </div>
 
         <Switch>
