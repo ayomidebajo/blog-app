@@ -5,8 +5,8 @@ import coffee from "../assets/coffee.jpeg";
 
 @inject("post")
 class Dashboard extends Component {
-  //Change cards look
   //browse for a great color theme
+  //find 20 random default header image or just one illustration for post images
 
   render() {
     const dateHandle = (val) => {
@@ -49,36 +49,18 @@ class Dashboard extends Component {
                       <p className=" font-weight-bold"> {item.title}</p>
                     </div>
                     <div className="post-body">
-                      <p className="text-truncate">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Nulla voluptas error nam quis fugiat recusandae
-                        eos distinctio, rerum qui? Voluptate atque deserunt
-                        maiores dolores itaque voluptatem cum explicabo fugit
-                        quam?
-                      </p>
-                      <small>19, Jan, 2022</small>
+                      {item.body.map
+                        ? item.body.map((item) => (
+                            <p className="text-truncate">
+                              {JSON.parse(item).text}
+                            </p>
+                          ))
+                        : item.body}
+                      <small> {dateHandle(item.created_at)}</small>
                     </div>
                   </div>
                 </div>
               </div>
-              // <div className="col-lg-4" key={item.id}>
-              //   <div
-              //     className="card-custom mt-2 mt-lg-2"
-              //     style={{ width: "100%" }}
-              //   >
-              //     <div className="card-body">
-              //       <h5 className="card-title">{item.title}</h5>
-
-              //       <p className="card-text">{item.body.text}</p>
-              //       <Link to="#" className="card-link">
-              //         {item.author}
-              //       </Link>
-              //       <Link to="#" className="card-link">
-              //         {dateHandle(item.created_at)}
-              //       </Link>
-              //     </div>
-              //   </div>
-              // </div>
             ))}
           </div>
         </div>

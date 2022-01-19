@@ -139,26 +139,7 @@ class Home extends Component {
             </ul>
           </div>
         </div>
-        <div className="container-sm">
-          {/* <div className="card-custom" style={{ width: "100%" }}>
-                <div className="card-body">
-                  <h5 className="card-title">Card Featured</h5>
-
-                  <p className="card-text">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Esse harum pariatur omnis, beatae nullLink dolore magni quam
-                    officiLink autem, possimus tenetur veniam debitis ducimus
-                    aspernatur rerum ratione sint? Reprehenderit, eum!
-                  </p>
-                  <Link to="#" className="card-link">
-                    Ayomide Bajo
-                  </Link>
-                  <Link to="#" className="card-link">
-                    23-11-21
-                  </Link>
-                </div>
-              </div> */}
-
+        <div className="container-sm mt-5">
           <Carousel
             breakPoints={breakPoints}
             showArrows={false}
