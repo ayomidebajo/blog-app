@@ -2,8 +2,9 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
+import sslRedirect from "heroku-ssl-redirect";
 
-const sslRedirect = require("heroku-ssl-redirect");
+// const sslRedirect = require("heroku-ssl-redirect");
 const cors = require("cors");
 const session = require("express-session");
 const path = require("path");
