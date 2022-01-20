@@ -12,9 +12,9 @@ class SignUpStore {
     console.log({ email, username, password, confirmPassword });
     let content = { email, username, password, confirmPassword };
     // eslint-disable-next-line no-unused-vars
-    const res = await axios.post("/register", content);
+    const res = await axios.post("/api/register", content);
     //Add check for register failure
-    // window.location.href = "/login";
+    window.location.href = "/login";
   };
 }
 
@@ -26,7 +26,7 @@ class SignInStore {
     makeObservable(this);
   }
   @action signin = (content) => {
-    const res = fromPromise(axios.post("/login", content));
+    const res = fromPromise(axios.post("/api/login", content));
     // console.log(res.value, "uhm");
     res.then((rest) => {
       try {

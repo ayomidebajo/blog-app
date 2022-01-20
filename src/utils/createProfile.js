@@ -6,7 +6,7 @@ const createProfile = async (id, username) => {
   console.log(id, "see");
   try {
     await pool.query(
-      `INSERT INTO profile (user_id, created_at, username) VALUES ($1, $2, $3) RETURNING id`,
+      `INSERT INTO profile (user_id, created_at, user_name) VALUES ($1, $2, $3) RETURNING id`,
       [id, date.format(now, "YYYY/MM/DD HH:mm:ss"), username]
     );
   } catch (error) {

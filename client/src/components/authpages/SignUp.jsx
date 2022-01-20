@@ -30,7 +30,7 @@ class SignUp extends Component {
         ...this.state,
         error: "",
       });
-      this.props.SignUpStore.signup(
+      this.props.signUp.signup(
         this.state.email,
         this.state.username,
         this.state.password,

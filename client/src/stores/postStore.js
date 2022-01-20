@@ -10,7 +10,7 @@ class postStore {
   }
 
   @action getPosts = async () => {
-    const res = fromPromise(axios("/posts"));
+    const res = fromPromise(axios("/api/posts"));
     res.then((results) => {
       console.log(results, "i heard");
       try {
@@ -22,7 +22,7 @@ class postStore {
     });
   };
   @action createPost = async (content) => {
-    const res = fromPromise(axios.post("/create-post", content));
+    const res = fromPromise(axios.post("/api/create-post", content));
     res.then((results) => {
       console.log(results, "i heard");
       try {
