@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A fullstack blog web application, built with Postgres, React, Node and Express",
   "main": "index.js",
+  "engines": {
+    "node": "16.13.0",
+    "npm": "7.24.0"
+  },
   "scripts": {
     "migrate": "node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:latest --knexfile knexfile.js",
     "test": "echo \"Error: no test specified\" && exit 1",
