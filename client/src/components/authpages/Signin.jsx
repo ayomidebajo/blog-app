@@ -40,11 +40,11 @@ class Signin extends Component {
               <h5 className="card-title">Sign in</h5>
               <form onSubmit={handleSubmit}>
                 <div className="form-group mt-3">
-                  <label htmlFor="exampleInputEmail1">Email address</label>
+                  <label htmlFor="exampleInputEmail1">Username</label>
                   <input
                     type="text"
                     name="username"
-                    value={this.state.email}
+                    value={this.state.username}
                     onChange={handleChange}
                     className="form-control"
                     id="exampleInputEmail1"

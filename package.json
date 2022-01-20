@@ -6,7 +6,8 @@
   "scripts": {
     "migrate": "node -r dotenv/config ./node_modules/knex/bin/cli.js migrate:latest --knexfile knexfile.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "heroku-postbuild": "cd client && yarn install && yarn run build"
   },
   "author": "Ayomide Bajo",
   "license": "MIT",
