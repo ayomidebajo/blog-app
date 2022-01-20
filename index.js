@@ -12,7 +12,6 @@ const { initializePassport } = require("./passportConfig");
 const authRouter = require("./src/routes/auth");
 const postRouter = require("./src/routes/post");
 const profileRouter = require("./src/routes/profile");
-const { patch } = require("./src/routes/auth");
 
 initializePassport(passport);
 
@@ -35,8 +34,8 @@ app.use(passport.session());
 app.use(flash());
 
 // app.use(express.urlencoded({ extended: false }));
-// app.use(express.static(path.join(__dirname, "client/build")));
-app.use(express.static("client/build"));
+app.use("/", express.static(path.join(__dirname, "client/build")));
+// app.use(express.static("client/build"));
 //ROUTES
 
 //testing route
