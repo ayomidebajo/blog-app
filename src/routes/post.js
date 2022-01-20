@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { authenticateToken } = require("../JWT/issueJWT");
 
+//ADD POST DB ON HEROKU
+
 const {
   createPost,
   createComment,
