@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
-import sslRedirect from "heroku-ssl-redirect";
+// import sslRedirect from "heroku-ssl-redirect";
 
 // const sslRedirect = require("heroku-ssl-redirect");
 const cors = require("cors");
@@ -21,7 +21,7 @@ initializePassport(passport);
 const PORT = process.env.PORT || 5000;
 
 //middleware
-app.use(sslRedirect());
+// app.use(sslRedirect());
 app.use(cors());
 app.use(express.json());
 app.use(
