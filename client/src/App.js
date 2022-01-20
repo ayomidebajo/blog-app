@@ -9,7 +9,7 @@ import Home from "./components/Home";
 import AddPost from "./components/AddPost";
 
 @inject("signIn")
-// Add the signin state
+// Add the signin states
 @observer
 class App extends Component {
   render() {
