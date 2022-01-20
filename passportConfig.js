@@ -12,13 +12,13 @@ const options = {
   algorithms: ["RS256"],
 };
 
+console.log(process.env.SECRET, "lol");
 function initializePassport(passport) {
   const authenticateUser = (email, password, done) => {
     pool.query(`SELECT * FROM users WHERE email = $1`, [email], (err, res) => {
       if (err) {
         throw err;
       }
-      console.log(res.rows);
 
       if (res.rows.length > 0) {
         const user = res.rows[0];
