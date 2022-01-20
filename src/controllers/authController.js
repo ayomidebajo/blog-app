@@ -61,7 +61,14 @@ const registerController = async (req, res, next) => {
                 createProfile(res.rows[0]?.id, username);
               }
             );
-
+            //    CREATE TABLE users (
+            // id serial PRIMARY KEY,
+            // user_id VARCHAR,
+            // username VARCHAR(50) UNIQUE NOT NULL,
+            // password VARCHAR(50) NOT NULL,
+            // email VARCHAR(255) UNIQUE NOT NULL,
+            // created_on TIMESTAMP
+            // );
             res.json({ message: "account created" });
           }
         }
