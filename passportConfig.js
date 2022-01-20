@@ -1,5 +1,5 @@
-const LocalStrategy = require("passport-local").Strategy;
 require("dotenv").config();
+const LocalStrategy = require("passport-local").Strategy;
 const pool = require("./db/db");
 const bcrypt = require("bcrypt");
 const JwtStrategy = require("passport-jwt").Strategy;
