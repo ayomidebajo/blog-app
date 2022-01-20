@@ -57,7 +57,8 @@ const registerController = async (req, res, next) => {
                 if (err) {
                   throw err;
                 }
-                createProfile(res.rows[0].id, username);
+                console.log(res.rows[0]?.id, "hey");
+                createProfile(res.rows[0]?.id, username);
               }
             );
 
