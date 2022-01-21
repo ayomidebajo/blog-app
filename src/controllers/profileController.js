@@ -1,5 +1,36 @@
 //Todo add endpoint for viewing profile
+const dotenv = require("dotenv");
+dotenv.config();
 const pool = require("../../db/db");
+// const fetch = require("node-fetch");
+const AWS = require("aws-sdk");
+const path = require("path");
+const fs = require("fs");
+const { patch } = require("../routes/post");
+
+const cloudSpace = new AWS.Endpoint(`${process.env.CLOUD_SPACE}`);
+
+const s3 = new AWS.S3({
+  endpoint: cloudSpace,
+  accessKeyId: `${process.env.CLOUD_SPACE_ACCESS_ID}`,
+  secretAccessKey: `${process.env.CLOUD_SPACE_SECRET_ACCESS_KEY}`,
+  region: "us-east-1",
+});
+
+let pathName = path.normalize("client/src/assets/idea-bulb.jpeg");
+let fileStream = fs.createReadStream(pathName);
+console.log(path.basename(pathName), "path for it!");
+
+let readFile = path.basename(pathName);
+
+let dataImg = fs.readFile(
+  pathName,
+  { encoding: "base64" },
+  function (err, data) {
+    if (err) console.log(err, "Err");
+  }
+);
+
 const viewProfile = async (req, res, next) => {
   try {
     let errors = [];
@@ -69,4 +100,41 @@ const editUsername = async (req, res, next) => {
   }
 };
 
-module.exports = { viewProfile, editUsername };
+const uploadProfilePicture = async (req, res, next) => {
+  try {
+    let errors = [];
+    let data = "";
+
+    // console.log(req.body, "reqs");
+    await req.on("data", function (chunk) {
+      data += chunk;
+    });
+
+    await req.on("end", function () {
+      console.log(data.toString(), "hey");
+      let params = {
+        Bucket: "aycloud",
+        Key: `/test/${readFile}`,
+        Body: `${data.toString()}`,
+        ACL: "private",
+      };
+
+      s3.putObject(params, function (err, data) {
+        if (err) {
+          console.log(err, "err");
+        } else {
+          console.log(data, "data");
+        }
+        res.status(200).send(responseJson);
+      });
+    });
+
+    let responseJson = {
+      message: "success!!!",
+    };
+  } catch (error) {
+    throw next(error);
+  }
+};
+
+module.exports = { viewProfile, editUsername, uploadProfilePicture };
