@@ -26,7 +26,7 @@ app.use(cors());
 app.use(express.json());
 app.use(
   session({
-    secret: "secret",
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
   })
