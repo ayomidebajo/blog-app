@@ -4,8 +4,6 @@ const { v4: uuidv4 } = require("uuid");
 
 const createPost = async (req, res, next) => {
   //TODO add parser for images and gifs
-  // Check what type of data, remirror returns
-  // deploy to heroku
   try {
     let { body, title, author, draft } = req.body;
     let now = new Date();

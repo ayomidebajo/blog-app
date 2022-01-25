@@ -1,6 +1,4 @@
-//Todo add endpoint for viewing profile
 //Todo add endpoint for updating profile
-// add endpoint for changing username
 const dotenv = require("dotenv");
 dotenv.config();
 const pool = require("../../db/db");
