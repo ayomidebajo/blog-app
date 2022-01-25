@@ -58,6 +58,19 @@ class SignInStore {
   }
 }
 
+class LogOut {
+  constructor() {
+    makeObservable(this);
+  }
+
+  @action logOut = () => {
+    fromPromise(axios("/api/logout"));
+    localStorage.removeItem("user_token");
+    window.location.href = "/";
+  };
+}
+
 const signIn = new SignInStore();
 const signUp = new SignUpStore();
-export { signIn, signUp };
+const logout = new LogOut();
+export { signIn, signUp, logout };

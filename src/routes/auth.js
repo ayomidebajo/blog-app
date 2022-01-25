@@ -42,6 +42,6 @@ router.get("/login", async (req, res) => {
 router.post("/login", loginController);
 router.post("/change-password", authenticateToken, changePassword);
 
-router.get("logout", logOut);
+router.get("/logout", authenticateToken, logOut);
 
 module.exports = router;

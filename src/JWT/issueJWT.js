@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-// const decoded = require("jwt-decode");dm
+const decoded = require("jwt-decode");
 require("dotenv").config();
 
 function generateAccessToken(username) {
@@ -17,14 +17,12 @@ function authenticateToken(req, res, next) {
 
   try {
     jwt.verify(token, process.env.SECRET, (err, user) => {
-      // res.status(200).json({
-      //   user: user.user,
-      // });
+      // console.log(user, "user");
 
       next();
     });
   } catch (error) {
-    res.status(401).json({
+    res.status(404).json({
       message: "Invalid token",
     });
   }

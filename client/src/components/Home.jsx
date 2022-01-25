@@ -8,7 +8,7 @@ import typewrite from "../assets/typewrite.jpeg";
 import penPc from "../assets/blog.jpg";
 import coffee from "../assets/paper-coffee.jpg";
 
-@inject("signIn", "signUp", "post")
+@inject("signIn", "signUp", "post", "logout")
 @observer
 class Home extends Component {
   navContainer = React.createRef(null);
@@ -125,14 +125,25 @@ class Home extends Component {
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
                 >
-                  <Link className="dropdown-item" to="/posts">
+                  <Link key="create-post" className="dropdown-item" to="/posts">
                     Create post
                   </Link>
-                  <Link className="dropdown-item" href="#">
+                  <Link key="dashboard" className="dropdown-item" href="#">
                     Dashboard
                   </Link>
-                  <Link className="dropdown-item" href="#">
+                  <Link
+                    key="change-username"
+                    className="dropdown-item"
+                    href="#"
+                  >
                     Change Username
+                  </Link>
+                  <Link
+                    key="logout"
+                    className="dropdown-item"
+                    onClick={() => this.props.logout.logOut()}
+                  >
+                    Logout
                   </Link>
                 </div>
               </li>
@@ -147,7 +158,7 @@ class Home extends Component {
           >
             {featured_posts.map
               ? featured_posts.map((item) => (
-                  <div className="card-custom">
+                  <div className="card-custom" key={item.id}>
                     <div className="">
                       <div className="row">
                         <img

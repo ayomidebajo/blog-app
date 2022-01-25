@@ -106,33 +106,33 @@ const uploadProfilePicture = async (req, res, next) => {
     let errors = [];
     let data = "";
 
+    let responseJson = {
+      message: "success!!!",
+    };
     // console.log(req.body, "reqs");
     await req.on("data", function (chunk) {
       data += chunk;
+      console.log(typeof data, "data chunk");
     });
 
     await req.on("end", function () {
-      console.log(data.toString(), "hey");
+      // console.log(data.toString(), "hey");
       let params = {
         Bucket: "aycloud",
         Key: `/test/${readFile}`,
-        Body: `${data.toString()}`,
+        Body: `${data}`,
         ACL: "private",
       };
 
       s3.putObject(params, function (err, data) {
         if (err) {
-          console.log(err, "err");
+          console.log("err");
         } else {
           console.log(data, "data");
         }
         res.status(200).send(responseJson);
       });
     });
-
-    let responseJson = {
-      message: "success!!!",
-    };
   } catch (error) {
     throw next(error);
   }
