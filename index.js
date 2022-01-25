@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
 const app = express();
+const bodyParser = require("body-parser");
 // import sslRedirect from "heroku-ssl-redirect";
 
 // const sslRedirect = require("heroku-ssl-redirect");
@@ -31,6 +32,12 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());

@@ -6,6 +6,7 @@ const AWS = require("aws-sdk");
 const path = require("path");
 const fs = require("fs");
 const { patch } = require("../routes/post");
+const { resolve } = require("path");
 
 const cloudSpace = new AWS.Endpoint(`${process.env.CLOUD_SPACE}`);
 
@@ -99,38 +100,47 @@ const editUsername = async (req, res, next) => {
   }
 };
 
+const getBuffer = (req) => {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+
+    req.on("data", (chunk) => chunks.push(chunk));
+    req.on("end", () => resolve(Buffer.concat(chunks)));
+    req.on("error", (err) => reject(err));
+  });
+};
+
 const uploadProfilePicture = async (req, res, next) => {
   try {
-    let errors = [];
-    let data = "";
+    // let errors = [];
+    // let { profile } = req.body;
 
     let responseJson = {
       message: "success!!!",
     };
-    // console.log(req.body, "reqs");
-    await req.on("data", function (chunk) {
-      data += chunk;
-      console.log(typeof data, "data chunk");
+
+    let data = await getBuffer(req);
+
+    let params = {
+      Bucket: "aycloud",
+      Key: `/test/stuff`,
+      Body: `${data}`,
+      ACL: "private",
+    };
+
+    s3.putObject(params, function (err, data) {
+      if (err) {
+        console.log("err");
+      } else {
+        console.log(data, "data");
+      }
+      res.status(200).send(responseJson);
     });
 
-    await req.on("end", function () {
-      // console.log(data.toString(), "hey");
-      let params = {
-        Bucket: "aycloud",
-        Key: `/test/${readFile}`,
-        Body: `${data}`,
-        ACL: "private",
-      };
+    // await req.on("end", function () {
+    //   console.log(data, "hey");
 
-      s3.putObject(params, function (err, data) {
-        if (err) {
-          console.log("err");
-        } else {
-          console.log(data, "data");
-        }
-        res.status(200).send(responseJson);
-      });
-    });
+    // });
   } catch (error) {
     throw next(error);
   }
