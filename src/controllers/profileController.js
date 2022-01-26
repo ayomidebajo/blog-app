@@ -1,12 +1,11 @@
 //Todo add endpoint for updating profile
+//fix file upload error
 const dotenv = require("dotenv");
 dotenv.config();
 const pool = require("../../db/db");
 const AWS = require("aws-sdk");
 const path = require("path");
 const fs = require("fs");
-const { patch } = require("../routes/post");
-const { resolve } = require("path");
 
 const cloudSpace = new AWS.Endpoint(`${process.env.CLOUD_SPACE}`);
 
