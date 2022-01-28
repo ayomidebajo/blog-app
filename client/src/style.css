@@ -152,4 +152,38 @@
   border-radius: 2px;
   margin: 0 5px;
 }
+
+.header--container {
+  height: 55vh;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.header-image {
+  background: linear-gradient(rgba(22, 4, 4, 0.45), rgba(0, 81, 255, 0.438)),
+    url("./assets/nature.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-radius: 5px;
+  /* background: url("./assets/blog.jpg") center no-repeat / cover; */
+  max-width: 100%;
+  height: inherit;
+
+  /* background:  */
+  /* top, transparent red, faked with gradient */
+  /* linear-gradient(
+      rgba(255, 0, 0, 0.45), 
+      rgba(255, 0, 0, 0.45)
+    ), */
+  /* bottom, image */
+  /* url(image.jpg); */
+}
+
+.overlay-bg {
+  background: rgba(251, 103, 103, 0.05);
+  /* position: absolute; */
+  margin: auto;
+  width: 100%;
+  height: inherit;
+}
 /* bootstrap */

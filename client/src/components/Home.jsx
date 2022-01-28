@@ -150,8 +150,8 @@ class Home extends Component {
             </ul>
           </div>
         </div>
-        <div className="container-sm mt-5">
-          <Carousel
+        <div className="container">
+          {/* <Carousel
             breakPoints={breakPoints}
             showArrows={false}
             enableMouseSwipe={true}
@@ -187,7 +187,11 @@ class Home extends Component {
                   </div>
                 ))
               : null}
-          </Carousel>
+          </Carousel> */}
+
+          <div className="header--container">
+            <div className="header-image"></div>
+          </div>
         </div>
 
         <Switch>

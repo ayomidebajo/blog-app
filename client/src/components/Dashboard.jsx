@@ -35,7 +35,7 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             {this.props.post.posts.map((item) => (
-              <div className="card-custom col-lg-4">
+              <div className="card-custom col-lg-4 ">
                 <div className="">
                   <div className="">
                     <img
