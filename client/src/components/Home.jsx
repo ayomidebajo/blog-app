@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import { Link, Redirect, Switch, Route } from "react-router-dom";
-import Carousel from "react-elastic-carousel";
 import Dashboard from "./Dashboard";
 import AddPost from "./AddPost";
 import typewrite from "../assets/typewrite.jpeg";
@@ -53,32 +52,10 @@ class Home extends Component {
       return <Redirect to="/login" />;
     }
     //browse for a nice color pallet
+    //change cards look
+    //more ui features
     console.log(this.props.signIn.user, "syin");
 
-    const breakPoints = [
-      { width: 1, itemsToShow: 1 },
-      { width: 550, itemsToShow: 1 },
-      { width: 768, itemsToShow: 1 },
-      { width: 1200, itemsToShow: 1 },
-    ];
-
-    const featured_posts = [
-      {
-        imgSrc: typewrite,
-        title: "This is just a type write post",
-        url: "",
-      },
-      {
-        imgSrc: coffee,
-        title: "This is just a coffee post",
-        url: "",
-      },
-      {
-        imgSrc: penPc,
-        title: "This is just a pen pc post",
-        url: "",
-      },
-    ];
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>
@@ -151,44 +128,6 @@ class Home extends Component {
           </div>
         </div>
         <div className="container">
-          {/* <Carousel
-            breakPoints={breakPoints}
-            showArrows={false}
-            enableMouseSwipe={true}
-          >
-            {featured_posts.map
-              ? featured_posts.map((item) => (
-                  <div className="card-custom" key={item.id}>
-                    <div className="">
-                      <div className="row">
-                        <img
-                          src={item.imgSrc}
-                          alt=""
-                          width="100%"
-                          height="100%"
-                          className="featured-post__img col-lg-9 p-0"
-                        />
-                        <div className="col-lg-3">
-                          <p className="featured-post-title font-weight-bold">
-                            {" "}
-                            {item.title}
-                          </p>
-                          <p>
-                            Lorem, ipsum dolor sit amet consectetur adipisicing
-                            elit. Nulla voluptas error nam quis fugiat
-                            recusandae eos distinctio, rerum qui? Voluptate
-                            atque deserunt maiores dolores itaque voluptatem cum
-                            explicabo fugit quam?
-                          </p>
-                          <small>19, Jan, 2022</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))
-              : null}
-          </Carousel> */}
-
           <div className="header--container">
             <div className="header-image"></div>
           </div>
