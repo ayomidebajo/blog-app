@@ -128,8 +128,20 @@ class Home extends Component {
           </div>
         </div>
         <div className="container">
-          <div className="header--container">
-            <div className="header-image"></div>
+          <div className="header--container d-flex align-items-center">
+            <div className="header-text col-6">
+              <p>Welcome to my Blog</p>
+              <p>
+                I'm just going to express myself and feed you good content at
+                the same time
+              </p>
+              <p>Happy reading!</p>
+            </div>
+
+            <div className="header-side">
+              <div className="blue-rectangle"></div>
+              <div className="header-image"></div>
+            </div>
           </div>
         </div>
 

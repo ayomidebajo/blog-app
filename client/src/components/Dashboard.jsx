@@ -35,7 +35,7 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             {this.props.post.posts.map((item) => (
-              <div className="card-custom col-lg-4 ">
+              <div className="card-custom col-lg-4 mb-sm-2">
                 <div className="">
                   <div className="">
                     <img
@@ -45,6 +45,14 @@ class Dashboard extends Component {
                       height="100%"
                       className="post__img"
                     />
+                    <div className="d-flex align-items-center my-2">
+                      {" "}
+                      <div
+                        className="avatar dropdown-toggle"
+                        type="button"
+                      ></div>
+                      <div className="">Ayomide Bajo</div>
+                    </div>
                     <div className="post-title">
                       <p className=" font-weight-bold"> {item.title}</p>
                     </div>
@@ -56,7 +64,10 @@ class Dashboard extends Component {
                             </p>
                           ))
                         : item.body}
-                      <small> {dateHandle(item.created_at)}</small>
+                      <div className="d-flex justify-content-between align-items-center">
+                        <small> {dateHandle(item.created_at)}</small>
+                        <div className=""></div>
+                      </div>
                     </div>
                   </div>
                 </div>

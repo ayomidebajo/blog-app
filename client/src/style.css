@@ -154,34 +154,41 @@
 }
 
 .header--container {
-  height: 55vh;
+  height: 400px;
   padding-left: 15px;
   padding-right: 15px;
 }
 .header-image {
   background: linear-gradient(rgba(22, 4, 4, 0.45), rgba(0, 81, 255, 0.438)),
-    url("./assets/nature.jpg");
+    url("./assets/woman-glasses.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  border-radius: 5px;
-  /* background: url("./assets/blog.jpg") center no-repeat / cover; */
-  max-width: 100%;
-  height: inherit;
+  /* border-radius: 5px; */
+  width: 90%;
 
-  /* background:  */
-  /* top, transparent red, faked with gradient */
-  /* linear-gradient(
-      rgba(255, 0, 0, 0.45), 
-      rgba(255, 0, 0, 0.45)
-    ), */
-  /* bottom, image */
-  /* url(image.jpg); */
+  height: 75%;
+  position: absolute;
+  top: 3rem;
+}
+
+.header-side {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.blue-rectangle {
+  height: 300px;
+  background-color: blue;
+  width: 90%;
+  top: 6.5rem;
+  position: absolute;
+  left: 4rem;
 }
 
 .overlay-bg {
   background: rgba(251, 103, 103, 0.05);
-  /* position: absolute; */
   margin: auto;
   width: 100%;
   height: inherit;
