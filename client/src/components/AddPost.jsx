@@ -113,6 +113,7 @@ class AddPost extends Component {
   render() {
     // const imagePlugin = createEmojiPlugin();
     // const { EmojiSuggestions } = imagePlugin;
+    //fix editor bugs
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>

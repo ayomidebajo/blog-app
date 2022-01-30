@@ -3,13 +3,12 @@ import { inject, observer } from "mobx-react";
 import { Link, Redirect, Switch, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import AddPost from "./AddPost";
-import typewrite from "../assets/typewrite.jpeg";
-import penPc from "../assets/blog.jpg";
-import coffee from "../assets/paper-coffee.jpg";
 
 @inject("signIn", "signUp", "post", "logout")
 @observer
 class Home extends Component {
+  //Change footer
+  //add comment, like and edit
   navContainer = React.createRef(null);
   state = {
     isVisble: false,
@@ -52,7 +51,6 @@ class Home extends Component {
       return <Redirect to="/login" />;
     }
     //browse for a nice color pallet
-    //change cards look
     //more ui features
     console.log(this.props.signIn.user, "syin");
 
