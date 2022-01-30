@@ -35,38 +35,45 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             {this.props.post.posts.map((item) => (
-              <div className="card-custom col-lg-4 mb-sm-2">
-                <div className="">
-                  <div className="">
-                    <img
-                      src={coffee}
-                      alt=""
-                      width="100%"
-                      height="100%"
-                      className="post__img"
-                    />
-                    <div className="d-flex align-items-center my-2">
-                      {" "}
-                      <div
-                        className="avatar dropdown-toggle"
-                        type="button"
-                      ></div>
-                      <div className="">Ayomide Bajo</div>
+              <div className="col-lg-6">
+                <div className="card-custom  mb-sm-2">
+                  <div className="d-flex">
+                    <div className="mr-4">
+                      <img
+                        src={coffee}
+                        alt=""
+                        width="100%"
+                        height="100%"
+                        className="post__img"
+                      />
                     </div>
-                    <div className="post-title">
-                      <p className=" font-weight-bold"> {item.title}</p>
-                    </div>
-                    <div className="post-body">
-                      {item.body.map
-                        ? item.body.map((item) => (
-                            <p className="text-truncate">
-                              {JSON.parse(item).text}
-                            </p>
-                          ))
-                        : item.body}
-                      <div className="d-flex justify-content-between align-items-center">
-                        <small> {dateHandle(item.created_at)}</small>
-                        <div className=""></div>
+                    <div className="mt-5">
+                      <div className="d-flex align-items-center my-2">
+                        {" "}
+                        <div
+                          className="avatar dropdown-toggle "
+                          type="button"
+                        ></div>
+                        <small className="blog-card-author">Ayomide Bajo</small>
+                      </div>
+
+                      <p className="blog-card-title"> {item.title}</p>
+                      <div className="reactions-and-more d-flex justify-content-between">
+                        <div>2 mins read</div>
+                        <div className="">stuff</div>
+                      </div>
+                      <div className="post-body">
+                        {item.body.map
+                          ? item.body.map((item) => (
+                              <p className="text-truncate">
+                                {JSON.parse(item).text}
+                              </p>
+                            ))
+                          : item.body}
+                        <div className="d-flex justify-content-between align-items-center">
+                          <small> {dateHandle(item.created_at)}</small>
+                          <div className=""></div>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   font-family: "Manrope", sans-serif;
+  font-size: 12px;
 }
 
 .auth--container {
@@ -136,6 +137,12 @@
   opacity: 0.7;
 }
 
+.card-custom {
+  font-family: "Roboto", sans-serif;
+  box-shadow: 0 4px 12px 0 rgb(0 0 0 / 5%);
+  border-radius: 5px;
+}
+
 .title-input {
   overflow: auto;
   resize: none;
@@ -151,6 +158,15 @@
   border: 1px solid grey;
   border-radius: 2px;
   margin: 0 5px;
+}
+
+.blog-card-author {
+  color: #405bea;
+}
+
+.blog-card-title {
+  font-weight: 400;
+  text-transform: uppercase;
 }
 
 .header--container {
