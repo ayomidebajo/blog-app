@@ -94,6 +94,26 @@ const getPosts = async (req, res, next) => {
   }
 };
 
+const getSinglePost = async (req, res, next) => {
+  try {
+    await pool.query(
+      `SELECT * FROM posts WHERE post_id = $1`,
+      [req.params.id],
+      async (err, results) => {
+        if (err) {
+          throw err;
+        }
+        console.log(results.rows, "res");
+        res.status(200).json({
+          data: results.rows,
+        });
+      }
+    );
+  } catch (error) {
+    throw next(error);
+  }
+};
+
 const addLike = async (req, res, next) => {
   try {
   } catch (error) {}
@@ -104,4 +124,11 @@ const removeLike = async (req, res, next) => {
   } catch (error) {}
 };
 
-module.exports = { createPost, createComment, addLike, removeLike, getPosts };
+module.exports = {
+  createPost,
+  createComment,
+  addLike,
+  removeLike,
+  getPosts,
+  getSinglePost,
+};

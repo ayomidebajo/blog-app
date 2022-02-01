@@ -6,6 +6,7 @@ const pool = require("../../db/db");
 const AWS = require("aws-sdk");
 const path = require("path");
 const fs = require("fs");
+const multer = require("multer");
 
 const cloudSpace = new AWS.Endpoint(`${process.env.CLOUD_SPACE}`);
 
@@ -104,10 +105,14 @@ const getBuffer = (req) => {
     const chunks = [];
 
     req.on("data", (chunk) => chunks.push(chunk));
-    req.on("end", () => resolve(Buffer.concat(chunks)));
+    req.on("end", () => {
+      resolve(Buffer.concat(chunks)), console.log(req.body, "req");
+    });
     req.on("error", (err) => reject(err));
   });
 };
+
+const uploadTest = async (req, res, next) => {};
 
 const uploadProfilePicture = async (req, res, next) => {
   try {
@@ -119,10 +124,11 @@ const uploadProfilePicture = async (req, res, next) => {
     };
 
     let data = await getBuffer(req);
+    console.log(data, "data");
 
     let params = {
       Bucket: "aycloud",
-      Key: `/test/stuff`,
+      Key: `/test/`,
       Body: `${data}`,
       ACL: "private",
     };
