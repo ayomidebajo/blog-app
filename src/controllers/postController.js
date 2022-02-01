@@ -116,7 +116,37 @@ const getSinglePost = async (req, res, next) => {
 
 const addLike = async (req, res, next) => {
   try {
-  } catch (error) {}
+    let { like } = req.body;
+    let initialLike = "";
+
+    await pool.query(
+      `SELECT * FROM posts where post_id = $1`,
+      [req.params.id],
+      async (err, results) => {
+        if (err) {
+          throw err;
+        }
+
+        initialLike = Number(results.rows[0].likes) + 1;
+        // console.log(initialLike, "ini");
+
+        await pool.query(
+          `UPDATE posts SET likes = $1 WHERE post_id = $2 RETURNING *`,
+          [String(initialLike), req.params.id],
+          async (err, results) => {
+            if (err) {
+              throw err;
+            }
+            res.status(200).json({
+              data: results.rows,
+            });
+          }
+        );
+      }
+    );
+  } catch (error) {
+    throw next(error);
+  }
 };
 
 const removeLike = async (req, res, next) => {
