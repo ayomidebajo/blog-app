@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { inject } from "mobx-react";
 import coffee from "../assets/coffee.jpeg";
+import { Link } from "react-router-dom";
 
 @inject("post")
 class Dashboard extends Component {
@@ -57,7 +58,10 @@ class Dashboard extends Component {
                         <small className="blog-card-author">Ayomide Bajo</small>
                       </div>
 
-                      <p className="blog-card-title"> {item.title}</p>
+                      <p className="blog-card-title">
+                        {" "}
+                        <Link to="/post/details">{item.title}</Link>
+                      </p>
                       <div className="reactions-and-more d-flex justify-content-between">
                         <div>2 mins read</div>
                         <div className="">stuff</div>

@@ -3,6 +3,7 @@ import { inject, observer } from "mobx-react";
 import { Link, Redirect, Switch, Route } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import AddPost from "./AddPost";
+// import PostDetails from "./PostDetails";
 
 @inject("signIn", "signUp", "post", "logout")
 @observer
@@ -146,6 +147,7 @@ class Home extends Component {
         <Switch>
           <Route component={Dashboard} path="/" />
           <Route component={AddPost} path="/posts" />
+          {/* <Route component={PostDetails} path="/post/details" /> */}
         </Switch>
 
         <div className="row mt-5 container mx-auto bottom-menu">

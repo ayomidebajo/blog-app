@@ -7,6 +7,8 @@ import Signin from "./components/authpages/Signin";
 import SignUp from "./components/authpages/SignUp";
 import Home from "./components/Home";
 import AddPost from "./components/AddPost";
+import PostDetails from "./components/PostDetails";
+import Settings from "./components/Settings";
 
 @inject("signIn")
 // Add the signin states
@@ -19,7 +21,9 @@ class App extends Component {
           <Route exact component={Home} path="/" />
           <Route component={Signin} path="/login" />
           <Route component={SignUp} path="/register" />
-          <Route component={AddPost} path="/posts" />
+          <Route component={AddPost} path="/post" />
+          <Route component={PostDetails} path="/post/details" />
+          <Route component={Settings} path="/settings" />
         </Switch>
       </Router>
     );
