@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import authIllustration from "../../assets/blog-illustration.png";
 import { inject, observer } from "mobx-react";
 
-@inject("signIn", "signUp")
+@inject("authStore")
 // Add the signin state
 @observer
 class Signin extends Component {
@@ -22,11 +22,11 @@ class Signin extends Component {
     const handleSubmit = (e) => {
       e.preventDefault();
       console.log(this.state);
-      this.props.signIn.signin(this.state);
+      this.props.authStore.signin(this.state);
       if (this.props.signIn.user) {
         this.setState({
           ...this.state,
-          cook: this.props.signIn.user,
+          cook: this.props.authStore.user,
         });
       }
     };

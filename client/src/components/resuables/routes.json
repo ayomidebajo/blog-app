@@ -1,0 +1,10 @@
+{
+  "ROUTES": {
+    "HOME": "/posts",
+    "LOGIN": "/login",
+    "REGISTER": "/register",
+    "POST": "/post",
+    "POST_DETAILS": "/details/:id",
+    "SETTINGS": "/settings"
+  }
+}

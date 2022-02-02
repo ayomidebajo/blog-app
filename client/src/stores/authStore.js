@@ -1,13 +1,16 @@
-import { makeObservable, observable, action } from "mobx";
+import { makeObservable, observable, action, computed } from "mobx";
 import { fromPromise } from "mobx-utils";
+import { create, persist } from "mobx-persist";
 import axios from "axios";
 import decode from "jwt-decode";
 import setAuthToken from "../utils/setAuthToken";
 
-class SignUpStore {
+class AuthStore {
+  @persist @observable user = "";
   constructor() {
     makeObservable(this);
   }
+
   @action signup = async (email, username, password, confirmPassword) => {
     console.log({ email, username, password, confirmPassword });
     let content = { email, username, password, confirmPassword };
@@ -16,15 +19,11 @@ class SignUpStore {
     //Add check for register failure
     window.location.href = "/login";
   };
-}
-
-class SignInStore {
-  @observable user = "";
-  @observable testArray = [];
-
-  constructor() {
-    makeObservable(this);
-  }
+  @action logOut = () => {
+    fromPromise(axios("/api/logout"));
+    localStorage.removeItem("user_token");
+    window.location.href = "/login";
+  };
   @action signin = (content) => {
     const res = fromPromise(axios.post("/api/login", content));
     // console.log(res.value, "uhm");
@@ -36,7 +35,7 @@ class SignInStore {
 
         this.user = username;
         localStorage.setItem("user_token", token);
-        window.location.href = "/";
+        window.location.href = "/posts";
       } catch (error) {
         console.log(error, "errors");
       }
@@ -58,19 +57,6 @@ class SignInStore {
   }
 }
 
-class LogOut {
-  constructor() {
-    makeObservable(this);
-  }
+const authStore = new AuthStore();
 
-  @action logOut = () => {
-    fromPromise(axios("/api/logout"));
-    localStorage.removeItem("user_token");
-    window.location.href = "/";
-  };
-}
-
-const signIn = new SignInStore();
-const signUp = new SignUpStore();
-const logout = new LogOut();
-export { signIn, signUp, logout };
+export { authStore };

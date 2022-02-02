@@ -8,7 +8,9 @@ class Dashboard extends Component {
   //browse for a great color theme
   //search for 20 random default header image or just one illustration for post images
   //search for a great footer design
-
+  componentDidMount() {
+    this.props.post.getPosts();
+  }
   render() {
     const dateHandle = (val) => {
       if (!val) {
@@ -31,12 +33,14 @@ class Dashboard extends Component {
 
       return val;
     };
+    const viewDetails = () => {};
+    console.log(this.props, "posts");
     return (
       <div className="main-body mt-5">
         <div className="container">
           <div className="row">
-            {this.props.post.posts.map((item) => (
-              <div className="col-lg-6">
+            {this.props.post?.posts?.map((item, i) => (
+              <div className="col-lg-6" key={item?.post_id}>
                 <div className="card-custom  mb-sm-2">
                   <div className="d-flex">
                     <div className="mr-4">
@@ -60,7 +64,9 @@ class Dashboard extends Component {
 
                       <p className="blog-card-title">
                         {" "}
-                        <Link to="/post/details">{item.title}</Link>
+                        <Link to={`/details/${item.post_id}`}>
+                          {item.title}
+                        </Link>
                       </p>
                       <div className="reactions-and-more d-flex justify-content-between">
                         <div>2 mins read</div>
@@ -69,7 +75,7 @@ class Dashboard extends Component {
                       <div className="post-body">
                         {item.body.map
                           ? item.body.map((item) => (
-                              <p className="text-truncate">
+                              <p className="text-truncate" key={item}>
                                 {JSON.parse(item).text}
                               </p>
                             ))

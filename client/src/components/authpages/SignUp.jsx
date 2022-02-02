@@ -4,7 +4,7 @@ import { inject, observer } from "mobx-react";
 import { Redirect } from "react-router";
 
 //Add the signup state
-@inject("signIn", "signUp")
+@inject("authStore")
 @observer
 class SignUp extends Component {
   state = {
@@ -30,7 +30,7 @@ class SignUp extends Component {
         ...this.state,
         error: "",
       });
-      this.props.signUp.signup(
+      this.props.authStore.signup(
         this.state.email,
         this.state.username,
         this.state.password,
