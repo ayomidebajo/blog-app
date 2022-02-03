@@ -1,16 +1,7 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
-import {
-  BrowserRouter as Router,
-  Link,
-  Redirect,
-  Switch,
-  Route,
-} from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Dashboard from "./Dashboard";
-import AddPost from "./AddPost";
-import Settings from "./Settings";
-import PostDetails from "./PostDetails";
 
 @inject("authStore", "post")
 @observer
@@ -82,13 +73,6 @@ class Home extends Component {
           </div>
         </div>
         <Dashboard />
-        {/* <Router>
-          <Switch>
-            <Route component={AddPost} path="/post" />
-            <Route component={Settings} path="/settings" />
-            <Route component={PostDetails} path="/details" />
-          </Switch>
-        </Router> */}
       </div>
     );
   }

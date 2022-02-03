@@ -9,9 +9,7 @@ import SignUp from "./components/authpages/SignUp";
 import Home from "./components/Home";
 import AddPost from "./components/AddPost";
 import PostDetails from "./components/PostDetails";
-import Settings from "./components/Settings";
 import CONSTANTS from "./components/resuables/routes.json";
-import PrivateRoute from "./utils/PrivateRoute";
 import Test from "./components/test";
 
 @inject("authStore")
@@ -24,11 +22,14 @@ class App extends Component {
         <Switch>
           {/* <PrivateRoute path={CONSTANTS.ROUTES.HOME} component={Home}/> */}
           <Route component={Test} exact path="/" />
-          {/* <Route exact component={Home} path={CONSTANTS.ROUTES.HOME} /> */}
+          <Route component={Home} path={CONSTANTS.ROUTES.HOME} />
           <Route component={Signin} path={CONSTANTS.ROUTES.LOGIN} />
           <Route component={SignUp} path={CONSTANTS.ROUTES.REGISTER} />
           <Route component={AddPost} path={CONSTANTS.ROUTES.POST} />
-          <Route component={PostDetails} path={CONSTANTS.ROUTES.POST_DETAILS} />
+          <Route
+            component={PostDetails}
+            path={`${CONSTANTS.ROUTES.POST_DETAILS}/:id`}
+          />
           {/* <Route component={Settings} path={CONSTANTS.ROUTES.SETTINGS} /> */}
         </Switch>
       </Router>

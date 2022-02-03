@@ -4,7 +4,7 @@
     "LOGIN": "/login",
     "REGISTER": "/register",
     "POST": "/post",
-    "POST_DETAILS": "/details/:id",
+    "POST_DETAILS": "/post-details",
     "SETTINGS": "/settings"
   }
 }

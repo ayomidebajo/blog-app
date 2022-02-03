@@ -33,8 +33,7 @@ class Dashboard extends Component {
 
       return val;
     };
-    const viewDetails = () => {};
-    console.log(this.props, "posts");
+
     return (
       <div className="main-body mt-5">
         <div className="container">
@@ -54,7 +53,7 @@ class Dashboard extends Component {
                     </div>
                     <div className="mt-5">
                       <div className="d-flex align-items-center my-2">
-                        {" "}
+                        {/* {" /post-details/${item.post_id}"} */}
                         <div
                           className="avatar dropdown-toggle "
                           type="button"
@@ -64,7 +63,8 @@ class Dashboard extends Component {
 
                       <p className="blog-card-title">
                         {" "}
-                        <Link to={`/details/${item.post_id}`}>
+                        <Link to={`/post-details/${item.post_id}`}>
+                          {" "}
                           {item.title}
                         </Link>
                       </p>

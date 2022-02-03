@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import { inject, observer } from "mobx-react";
 import { Editor, EditorState, RichUtils, convertToRaw } from "draft-js";
-// import createEmojiPlugin from "draft-js-emoji-plugin";
-// import "draft-js-emoji-plugin/lib/plugin.css";
-import { Link } from "react-router-dom";
 import "draft-js/dist/Draft.css";
 import debounce from "lodash/debounce";
-
-// import { Link } from "react-router-dom";
 
 @inject("post")
 // create post

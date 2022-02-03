@@ -1,18 +1,6 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Redirect,
-} from "react-router-dom";
-import AddPost from "./AddPost";
-import Home from "./Home";
-import PostDetails from "./PostDetails";
-import { inject, observer } from "mobx-react";
-import Signin from "./authpages/Signin";
-import SignUp from "./authpages/SignUp";
-import CONSTANTS from "./resuables/routes.json";
+import { Link, Redirect } from "react-router-dom";
+import { inject } from "mobx-react";
 import Dashboard from "./Dashboard";
 
 @inject("authStore")
@@ -58,13 +46,6 @@ class Test extends Component {
     } else {
       return <Redirect to="/login" />;
     }
-    const renderPost = (e) => {
-      e.preventDefault();
-      this.setState({
-        ...this.state,
-        render: !this.state.render,
-      });
-    };
 
     console.log(this.props, "shitt happens");
     return (
@@ -113,7 +94,7 @@ class Test extends Component {
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
                 >
-                  <Link key="create-post" className="dropdown-item" to="/posts">
+                  <Link key="create-post" className="dropdown-item" to="/post">
                     Create post
                   </Link>
                   <Link key="dashboard" className="dropdown-item" to="#">
@@ -151,20 +132,12 @@ class Test extends Component {
               <div className="header-image"></div>
             </div>
           </div>
-          <button onClick={(e) => renderPost(e)}> See posts</button>
+          {/* <button onClick={(e) => renderPost(e)}> See posts</button> */}
         </div>
 
+        <Dashboard />
+
         {/* <button onClick={(e) => renderPost(e)}> See posts</button> */}
-
-        {this.state.render ? <Dashboard /> : null}
-
-        <Router>
-          <Switch>
-            <Route component={Home} path="/" />
-            <Route component={AddPost} path="/post" />
-            <Route component={PostDetails} path="/posts/details/:id" />
-          </Switch>
-        </Router>
 
         <div className="row mt-5 container mx-auto bottom-menu">
           <div className="col-lg-4 mt-3">

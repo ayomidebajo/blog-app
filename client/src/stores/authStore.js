@@ -1,4 +1,4 @@
-import { makeObservable, observable, action, computed } from "mobx";
+import { makeObservable, observable, action } from "mobx";
 import { fromPromise } from "mobx-utils";
 import { create, persist } from "mobx-persist";
 import axios from "axios";
@@ -23,6 +23,7 @@ class AuthStore {
     fromPromise(axios("/api/logout"));
     localStorage.removeItem("user_token");
     localStorage.removeItem("user");
+
     window.location.href = "/login";
   };
   @action signin = (content) => {
@@ -48,7 +49,6 @@ class AuthStore {
     console.log(exp, Date.now() / 1000, "just rest");
     if (exp < Date.now() / 1000) {
       localStorage.removeItem("user_token");
-      localStorage.removeItem("user");
 
       // window.location.href = "/login";
       // window.history.pushState();
