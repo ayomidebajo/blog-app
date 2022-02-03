@@ -65,6 +65,8 @@ class Test extends Component {
         render: !this.state.render,
       });
     };
+
+    console.log(this.props, "shitt happens");
     return (
       <div className="main--container">
         <div className="navbar-custom__container" ref={this.navContainer}>

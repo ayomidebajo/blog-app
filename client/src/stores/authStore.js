@@ -22,6 +22,7 @@ class AuthStore {
   @action logOut = () => {
     fromPromise(axios("/api/logout"));
     localStorage.removeItem("user_token");
+    localStorage.removeItem("user");
     window.location.href = "/login";
   };
   @action signin = (content) => {
@@ -35,7 +36,8 @@ class AuthStore {
 
         this.user = username;
         localStorage.setItem("user_token", token);
-        window.location.href = "/posts";
+
+        window.location.href = "/";
       } catch (error) {
         console.log(error, "errors");
       }
@@ -46,6 +48,8 @@ class AuthStore {
     console.log(exp, Date.now() / 1000, "just rest");
     if (exp < Date.now() / 1000) {
       localStorage.removeItem("user_token");
+      localStorage.removeItem("user");
+
       // window.location.href = "/login";
       // window.history.pushState();
     }
@@ -53,10 +57,17 @@ class AuthStore {
     return;
   };
   get user() {
-    return this.user;
+    return JSON.parse(this.user);
   }
 }
 
+const hydrate = create({
+  storage: localStorage,
+  jsonify: true,
+});
+
 const authStore = new AuthStore();
+
+hydrate("user", authStore).then((res) => console.log(res, "outside"));
 
 export { authStore };
