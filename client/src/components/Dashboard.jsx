@@ -8,6 +8,8 @@ class Dashboard extends Component {
   //browse for a great color theme
   //search for 20 random default header image or just one illustration for post images
   //search for a great footer design
+  //do better
+  //add comment feature in frontend
   componentDidMount() {
     this.props.post.getPosts();
   }
