@@ -12,12 +12,17 @@ class AuthStore {
   }
 
   @action signup = async (email, username, password, confirmPassword) => {
-    console.log({ email, username, password, confirmPassword });
-    let content = { email, username, password, confirmPassword };
-    // eslint-disable-next-line no-unused-vars
-    const res = await axios.post("/api/register", content);
-    //Add check for register failure
-    window.location.href = "/login";
+    try {
+      console.log({ email, username, password, confirmPassword });
+      let content = { email, username, password, confirmPassword };
+      // eslint-disable-next-line no-unused-vars
+      const res = await axios.post("/api/register", content);
+      //Add check for register failure
+      window.location.href = "/login";
+    } catch (error) {
+      console.log(error, "couldn't signup");
+      //Add toast container
+    }
   };
   @action logOut = () => {
     fromPromise(axios("/api/logout"));
