@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 // create post
 // change Card UI
 //get profile
+// Ui
 
 @observer
 class AddPost extends Component {
