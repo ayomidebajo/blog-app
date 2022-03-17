@@ -35,7 +35,7 @@ class Dashboard extends Component {
 
       return val;
     };
-
+    console.log(this.props.post);
     return (
       <div className="main-body mt-5">
         <div className="container">

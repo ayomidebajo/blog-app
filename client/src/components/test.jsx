@@ -56,7 +56,7 @@ class Test extends Component {
               this.state.isVisble ? "navbar-custom__active" : ""
             }`}
           >
-            <ul className="navbar-links__container">
+            <ul className="navbar-links__container container">
               <li className="navbar-link">
                 <div className="logo">
                   <em>
