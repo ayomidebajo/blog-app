@@ -56,7 +56,19 @@ class Home extends Component {
     return (
       <div>
         <div className="container">
-          <div className="header--container d-flex align-items-center">
+          {/* <div className="header-new__container">
+            <div className="header-image">
+              <div className="header-title">
+                It is time Nigerians stood for their right
+              </div>
+              <p>
+                The current black out in Nigeria has caused millions of
+                Nigerians to stay in darkness or spend more money on fuel admist
+                the fuel crises...
+              </p>
+            </div>
+          </div> */}
+          {/* <div className="header--container d-flex align-items-center">
             <div className="header-text col-6">
               <p>Welcome to my Blog</p>
               <p>
@@ -70,7 +82,7 @@ class Home extends Component {
               <div className="blue-rectangle"></div>
               <div className="header-image"></div>
             </div>
-          </div>
+          </div> */}
         </div>
         <Dashboard />
       </div>

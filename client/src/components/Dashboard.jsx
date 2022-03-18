@@ -41,10 +41,10 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             {this.props.post?.posts?.map((item, i) => (
-              <div className="col-lg-6" key={item?.post_id}>
-                <div className="card-custom  mb-sm-2">
-                  <div className="d-flex">
-                    <div className="mr-4">
+              <div className="col-lg-4 p-0 pr-4" key={item?.post_id}>
+                <div className="card-custom mb-4">
+                  <div className="">
+                    <div className="">
                       <img
                         src={coffee}
                         alt=""
@@ -53,38 +53,32 @@ class Dashboard extends Component {
                         className="post__img"
                       />
                     </div>
-                    <div className="mt-5">
-                      <div className="d-flex align-items-center my-2">
-                        {/* {" /post-details/${item.post_id}"} */}
-                        <div
-                          className="avatar dropdown-toggle "
-                          type="button"
-                        ></div>
-                        <small className="blog-card-author">Ayomide Bajo</small>
-                      </div>
-
-                      <p className="blog-card-title">
-                        {" "}
-                        <Link to={`/post-details/${item.post_id}`}>
+                    <div className="mt-5 d-flex justify-content-between">
+                      <div className="p-3">
+                        <p className="header-new-title">
                           {" "}
-                          {item.title}
-                        </Link>
-                      </p>
-                      <div className="reactions-and-more d-flex justify-content-between">
-                        <div>2 mins read</div>
-                        <div className="">stuff</div>
-                      </div>
-                      <div className="post-body">
-                        {item.body.map
-                          ? item.body.map((item) => (
-                              <p className="text-truncate" key={item}>
-                                {JSON.parse(item).text}
-                              </p>
-                            ))
-                          : item.body}
-                        <div className="d-flex justify-content-between align-items-center">
-                          <small> {dateHandle(item.created_at)}</small>
-                          <div className=""></div>
+                          <Link to={`/post-details/${item.post_id}`}>
+                            {" "}
+                            {item.title}
+                          </Link>
+                        </p>
+                        {/* <div className="reactions-and-more d-flex justify-content-between">
+                          <div>2 mins read</div>
+                          <div className="">stuff</div>
+                        </div> */}
+                        <div className="post-body">
+                          {item.body.map
+                            ? item.body.map((item) => (
+                                <p className="text-truncate" key={item}>
+                                  {JSON.parse(item).text}
+                                </p>
+                              ))
+                            : item.body}
+                          <div className="d-flex justify-content-between align-items-center">
+                            <small> {dateHandle(item.created_at)}</small>
+                            <div className=""></div>
+                          </div>
+                          <button className="header-btn">Read more</button>
                         </div>
                       </div>
                     </div>
